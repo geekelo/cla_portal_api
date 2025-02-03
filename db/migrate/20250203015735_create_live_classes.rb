@@ -1,4 +1,4 @@
-class CreateLiveCLasses < ActiveRecord::Migration[7.1]
+class CreateLiveClasses < ActiveRecord::Migration[7.1]
   def up
     # Enable the UUID extension if using PostgreSQL
     enable_extension 'uuid-ossp' unless extension_enabled?('uuid-ossp')
