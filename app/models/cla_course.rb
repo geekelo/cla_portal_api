@@ -1,4 +1,4 @@
-class CreateClaCourses < ApplicationRecord
+class CreateClaCourse < ApplicationRecord
   has_many :topics, class_name: 'ClaTopic', foreign_key: 'cla_course_id'
   has_many :assignments, class_name: 'ClaAssignment', foreign_key: 'cla_course_id'
   has_many :live_classes, class_name: 'ClaLiveClass', foreign_key: 'cla_course_id'
