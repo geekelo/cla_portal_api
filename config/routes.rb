@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/sign_in', to: 'authentication#create'
       post '/sign_up', to: 'registration#create'
+
+      # cohort
+      get '/cla_cohorts', to: 'cla_cohorts#index'
+      get '/cla_cohorts/:id', to: 'cla_cohorts#show'
+      post '/cla_cohorts/new', to: 'cla_cohorts#create'
+      patch '/cla_cohorts/:id', to: 'cla_cohorts#update'
     end
   end
 

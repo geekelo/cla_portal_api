@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_03_020613) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_03_121235) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -31,6 +31,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_020613) do
     t.bigint "cla_course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
     t.index ["cla_course_id"], name: "index_cla_cohorts_on_cla_course_id"
     t.index ["name"], name: "index_cla_cohorts_on_name", unique: true
   end

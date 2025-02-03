@@ -16,11 +16,3 @@ cla_roles.each do |role_name|
   ClaRole.find_or_create_by!(name: role_name)
 end
 puts '✅ Roles seeded successfully!'
-
-cla_cohorts = %w[cohort 1] # Array of cohort names
-
-cla_cohorts.each do |cohort_name| # Using correct variable name
-  ClaCohort.find_or_create_by!(name: cohort_name)
-end
-
-puts '✅ Cohort seeded successfully!'
