@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_03_121235) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_03_121236) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -31,8 +31,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_121235) do
     t.bigint "cla_course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "start_date", null: false
-    t.date "end_date", null: false
+    t.date "start_date"
+    t.date "end_date"
     t.index ["cla_course_id"], name: "index_cla_cohorts_on_cla_course_id"
     t.index ["name"], name: "index_cla_cohorts_on_name", unique: true
   end
@@ -47,6 +47,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_121235) do
     t.bigint "cla_cohort_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "start_date"
+    t.date "end_date"
     t.index ["assignment_id"], name: "index_cla_courses_on_assignment_id"
     t.index ["cla_cohort_id"], name: "index_cla_courses_on_cla_cohort_id"
     t.index ["cla_user_id"], name: "index_cla_courses_on_cla_user_id"
@@ -79,12 +81,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_121235) do
     t.datetime "date_submitted", null: false
     t.string "status", default: "unmarked", null: false
     t.integer "score"
-    t.uuid "cla_assignment_id_id"
-    t.uuid "cla_student_id_id"
+    t.uuid "cla_assignment_id"
+    t.uuid "cla_student_id"
+    t.uuid "cla_facilitator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cla_assignment_id_id"], name: "index_cla_submissions_on_cla_assignment_id_id"
-    t.index ["cla_student_id_id"], name: "index_cla_submissions_on_cla_student_id_id"
+    t.index ["cla_assignment_id"], name: "index_cla_submissions_on_cla_assignment_id"
+    t.index ["cla_facilitator_id"], name: "index_cla_submissions_on_cla_facilitator_id"
+    t.index ["cla_student_id"], name: "index_cla_submissions_on_cla_student_id"
   end
 
   create_table "cla_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

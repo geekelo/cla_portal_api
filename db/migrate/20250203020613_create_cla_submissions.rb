@@ -10,9 +10,9 @@ class CreateClaSubmissions < ActiveRecord::Migration[7.1]
       t.integer :score, null: true 
 
       # Foreign keys
-      t.references :cla_assignment_id, type: :uuid, null: true, foreign_key: false
-      t.references :cla_student_id, type: :uuid, null: true, foreign_key: false
-
+      t.references :cla_assignment, type: :uuid, null: true, foreign_key: false
+      t.references :cla_student, type: :uuid, null: true, foreign_key: false
+      t.references :cla_facilitator, type: :uuid, null: true, foreign_key: false
       t.timestamps
     end
   end
