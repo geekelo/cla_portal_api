@@ -10,7 +10,7 @@ module API
         role = ClaRole.find(params[:id])
         render json: { role: role }, status: :ok
       end
-      
+
       def create
         role = ClaRole.new(role_params)
         if role.save
