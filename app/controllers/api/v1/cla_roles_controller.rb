@@ -20,7 +20,7 @@ module API
         end
       end
 
-      def update
+      def update      
         role = ClaRole.find(params[:id])
         if role.update(role_params)
           render json: { message: 'Role updated successfully' }, status: :ok
