@@ -1,6 +1,6 @@
-module API
+module Api
   module V1
-    class ClaCourses < ApplicationController
+    class ClaCoursesController < ApplicationController
       def index
         courses = ClaCourse.all
         render json: courses, each_serializer: ClaCourseSerializer, status: :ok

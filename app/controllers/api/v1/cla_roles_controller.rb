@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ClaRoles < ApplicationController
+    class ClaRolesController < ApplicationController
       def index
         roles = ClaRole.all
         render json: { roles: roles }, status: :ok

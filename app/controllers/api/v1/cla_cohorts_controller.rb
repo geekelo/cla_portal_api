@@ -1,6 +1,6 @@
 module Api
   module V1
-    class Api::V1::ClaCohortsController < ApplicationController
+    class ClaCohortsController < ApplicationController
       def index
         cohorts = ClaCohort.all
         render json: { cohorts: cohorts }, status: :ok
