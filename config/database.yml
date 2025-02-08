@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
   database: cla_portal_api_production
   username: cla_portal_api
   password: <%= ENV["CLA_PORTAL_API_DATABASE_PASSWORD"] %>
