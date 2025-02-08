@@ -5,5 +5,5 @@ class ClaCourse < ApplicationRecord
   belongs_to :facilitators, lambda {
                               joins(:cla_role).where(cla_roles: { name: 'facilitator' })
                             }, class_name: 'ClaUser', foreign_key: 'cla_user_id'
-  belongs_to_many :cohorts, class_name: 'ClaCohort', foreign_key: 'cla_cohort_id'
+  has_many :cohorts, class_name: 'ClaCohort', foreign_key: 'cla_cohort_id'
 end
