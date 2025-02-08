@@ -16,3 +16,40 @@ cla_roles.each do |role_name|
   ClaRole.find_or_create_by!(name: role_name)
 end
 puts '✅ Roles seeded successfully!'
+
+cla_roles = %w[student facilitator alumni admin]
+
+# db/seeds.rb
+
+# Define an array of cohort data
+cohorts_data = [
+  { name: 'Spring 2025', start_date: '2025-03-01', end_date: '2025-06-30' },
+  { name: 'Summer 2025', start_date: '2025-07-01', end_date: '2025-09-30' },
+  { name: 'Fall 2025',   start_date: '2025-09-01', end_date: '2025-12-31' }
+]
+
+# Create or find cohorts based on the name attribute.
+cohorts_data.each do |data|
+  ClaCohort.find_or_create_by!(name: data[:name]) do |cohort|
+    cohort.start_date = data[:start_date]
+    cohort.end_date   = data[:end_date]
+  end
+end
+
+puts '✅ Cohorts seeded successfully!'
+
+# Seed the admin user.
+admin_email = 'admin@example.com'
+admin_password = 'securepassword'  # Replace with a strong password in production
+
+admin_user = ClaUser.find_or_initialize_by(email: admin_email)
+admin_user.assign_attributes(
+  name: 'Admin User',
+  password: admin_password,
+  password_confirmation: admin_password,
+  cla_role_id: nil,
+  cla_cohort_id: nil
+)
+admin_user.save!
+
+puts '✅ Admin user seeded successfully!'

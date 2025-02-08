@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_03_121236) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_03_121237) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -105,7 +105,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_121236) do
     t.string "name", null: false
     t.string "email", null: false
     t.bigint "cla_cohort_id"
-    t.bigint "cla_role_id", null: false
+    t.bigint "cla_role_id"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

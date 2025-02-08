@@ -3,11 +3,10 @@ class ClaUser < ApplicationRecord
   validates :email, presence: true, uniqueness: true,
                     format: { with: URI::MailTo::EMAIL_REGEXP, message: 'must be a valid email format' }
   validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
-  validates :cla_role_id, presence: true
 
   has_secure_password
   belongs_to :cla_cohort, optional: true
-  belongs_to :cla_role, optional: false
+  belongs_to :cla_role, optional: true
 
   before_create :generate_user_id
 
