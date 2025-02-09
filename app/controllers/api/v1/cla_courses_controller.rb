@@ -13,10 +13,12 @@ module Api
 
       def create
         course = ClaCourse.new(course_params)
+      
         if course.save
-          render json: { message: 'Course created successfully' }, status: :created
+          render json: course, status: :created
         else
-          render json: { error: 'Something went wrong creating course' }, status: :unprocessable_entity
+          Rails.logger.info "Validation Errors: #{course.errors.full_messages}"
+          render json: { errors: course.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
