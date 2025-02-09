@@ -40,7 +40,7 @@ module Api
       private
 
       def course_params
-        params.require(:course).permit(:name, :description, :cla_cohort_id, :start_date, :end_date, :cla_user_id, :locked)
+        params.require(:cla_course).permit(:name, :description, :cla_cohort_id, :start_date, :end_date, :cla_user_id)
       end
     end
   end
