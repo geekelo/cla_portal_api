@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_10_132514) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_10_132515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_10_132514) do
     t.string "name", null: false
     t.text "description", null: false
     t.uuid "cla_course_id", null: false
-    t.uuid "cla_user_id", null: false
+    t.string "cla_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "due_date"
