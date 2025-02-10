@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_03_121237) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_03_121249) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_121237) do
     t.uuid "cla_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "due_date"
     t.index ["cla_course_id"], name: "index_cla_assignments_on_cla_course_id"
     t.index ["cla_user_id"], name: "index_cla_assignments_on_cla_user_id"
   end
@@ -49,6 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_03_121237) do
     t.datetime "updated_at", null: false
     t.date "start_date"
     t.date "end_date"
+    t.boolean "locked", default: false
     t.index ["assignment_id"], name: "index_cla_courses_on_assignment_id"
     t.index ["cla_cohort_id"], name: "index_cla_courses_on_cla_cohort_id"
     t.index ["cla_user_id"], name: "index_cla_courses_on_cla_user_id"
