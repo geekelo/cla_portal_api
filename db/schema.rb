@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_10_132515) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_10_183936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -65,9 +65,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_10_132515) do
     t.time "time", null: false
     t.string "duration", null: false
     t.string "zoom_link", null: false
-    t.uuid "cla_course_id", null: false
+    t.string "cla_course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cla_cohort_id"
+    t.string "cla_user_id"
     t.index ["cla_course_id"], name: "index_cla_live_classes_on_cla_course_id"
   end
 
@@ -116,6 +118,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_10_132515) do
     t.index ["email"], name: "index_cla_users_on_email", unique: true
   end
 
-  add_foreign_key "cla_live_classes", "cla_courses"
   add_foreign_key "cla_users", "cla_roles"
 end
