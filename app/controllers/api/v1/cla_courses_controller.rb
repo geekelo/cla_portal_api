@@ -6,6 +6,19 @@ module Api
         render json: courses, each_serializer: ClaCourseSerializer, status: :ok
       end
 
+      def index
+        if params[:cla_user_id].present?
+          courses = ClaCourse.where(cla_user_id: params[:cla_user_id])
+        elsif params[:cla_cohort_id].present?
+          courses = ClaCourse.where(cla_cohort_id: params[:cla_cohort_id])
+        else
+          courses = ClaCourse.all
+        end
+      
+        render json: courses, each_serializer: ClaCourseSerializer, status: :ok
+      end
+      
+
       def show
         course = ClaCourse.find(params[:id])
         render json: { course: course }, status: :ok
