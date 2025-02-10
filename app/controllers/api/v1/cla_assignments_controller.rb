@@ -28,7 +28,7 @@ module Api
       private
 
       def assignment_params
-        params.require(:assignment).permit(:name, :description, :due_date, :cla_course_id, :cla_user_id)
+        params.require(:cla_assignment).permit(:name, :description, :due_date, :cla_course_id, :cla_user_id)
       end
     end
   end

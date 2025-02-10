@@ -39,7 +39,7 @@ module Api
       private
 
       def submission_params
-        params.require(:submission).permit(:content, :cla_assignment_id, :cla_user_id)
+        params.require(:cla_submission).permit(:content, :cla_assignment_id, :cla_user_id)
       end
     end
   end

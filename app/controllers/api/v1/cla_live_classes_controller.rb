@@ -28,7 +28,7 @@ module Api
       private
 
       def live_class_params
-        params.require(:live_class).permit(:name, :date, :time, :duration, :zoom_link, :cla_course_id)
+        params.require(:cla_live_class).permit(:name, :date, :time, :duration, :zoom_link, :cla_course_id)
       end
     end
   end
