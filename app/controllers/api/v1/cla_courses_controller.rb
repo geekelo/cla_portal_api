@@ -50,6 +50,11 @@ module Api
         render json: { message: 'Course deleted successfully' }, status: :ok
       end
 
+      def get_course_ids
+        course_ids = ClaCourse.where(cla_cohort_id: params[:cla_cohort_id]).pluck(:id)
+        render json: { course_ids: course_ids }, status: :ok
+      end
+
       private
 
       def course_params
