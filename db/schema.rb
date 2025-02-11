@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_10_191537) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_11_012326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_10_191537) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "due_date"
+    t.boolean "submitted", default: false
     t.index ["cla_course_id"], name: "index_cla_assignments_on_cla_course_id"
     t.index ["cla_user_id"], name: "index_cla_assignments_on_cla_user_id"
   end
