@@ -3,16 +3,16 @@ module Api
     class ClaAssignmentsController < ApplicationController
       def index
         if params[:cla_course_id].present?
-          assignments = assignments.where(cla_course_id: params[:cla_course_id])
+          assignments = ClaAssignment.where(cla_course_id: params[:cla_course_id])
         elsif params[:cla_user_id].present?
-          assignments = assignments.where(cla_user_id: params[:cla_user_id])
+          assignments = ClaAssignment.where(cla_user_id: params[:cla_user_id])
         else
           assignments = ClaAssignment.all
         end
-
-        render json: assignments, status: :ok
-      end
-
+      
+        render json: assignments, each_serializer: ClaAssignmentSerializer, status: :ok
+      end  
+      
       def create
         assignment = ClaAssignment.new(assignment_params)
         if assignment.save
