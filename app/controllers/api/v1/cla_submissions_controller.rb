@@ -13,11 +13,12 @@ module Api
       end
 
       def create
-        submission = ClaSubmission.new(submission_params)
+        submission = ClaSubmission.new(cla_submission_params)
         if submission.save
-          render json: { message: 'Submission created successfully' }, status: :created
+          render json: submission, status: :created
         else
-          render json: { error: 'Something went wrong creating submission' }, status: :unprocessable_entity
+          Rails.logger.info "Validation Errors: #{submission.errors.full_messages}"
+          render json: { errors: submission.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
