@@ -39,7 +39,7 @@ module Api
       private
 
       def submission_params
-        params.require(:cla_submission).permit(:download_link, :cla_assignment_id, :cla_student_id, :cla_facilitator_id, :score)
+        params.require(:cla_submission).permit(:download_link, :cla_assignment_id, :cla_student_id, :cla_facilitator_id)
       end
     end
   end
