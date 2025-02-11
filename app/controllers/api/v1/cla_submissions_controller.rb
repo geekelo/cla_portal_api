@@ -13,7 +13,7 @@ module Api
       end
 
       def create
-        submission = ClaSubmission.new(cla_submission_params)
+        submission = ClaSubmission.new(submission_params)
         if submission.save
           render json: submission, status: :created
         else
