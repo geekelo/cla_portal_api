@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ClaSubmissionController < ApplicationController
+    class ClaSubmissionsController < ApplicationController
       def index
         if params[:cla_user_id].present?
           submissions = ClaSubmission.where(cla_student_id: params[:cla_user_id])
@@ -39,7 +39,7 @@ module Api
       private
 
       def submission_params
-        params.require(:cla_submission).permit(:download_link, :cla_assignment_id, :cla_user_id, :status, :score)
+        params.require(:cla_submission).permit(:download_link, :cla_assignment_id, :cla_user_id, :score)
       end
     end
   end
