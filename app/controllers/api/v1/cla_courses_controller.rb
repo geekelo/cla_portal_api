@@ -2,11 +2,6 @@ module Api
   module V1
     class ClaCoursesController < ApplicationController
       def index
-        courses = ClaCourse.all
-        render json: courses, each_serializer: ClaCourseSerializer, status: :ok
-      end
-
-      def index
         if params[:cla_user_id].present?
           courses = ClaCourse.where(cla_user_id: params[:cla_user_id])
         elsif params[:cla_cohort_id].present?
