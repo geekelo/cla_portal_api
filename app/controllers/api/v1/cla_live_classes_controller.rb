@@ -1,6 +1,16 @@
 module Api
   module V1
     class ClaLiveClassesController < ApplicationController
+      def index
+        if params[:filter_id].present?
+          submissions = ClaLiveClass.where("cla_cohort_id = ? OR cla_course_id = ? OR cla_user_id", params[:filter_id], params[:filter_id], params[:filter_id])
+        else
+          submissions = ClaLiveClass.all
+        end
+      
+        render json: submissions, each_serializer:ClaLiveClassSerializer, status: :ok
+      end      
+      
       def create
         live_class = ClaLiveClass.new(live_class_params)
         if live_class.save
