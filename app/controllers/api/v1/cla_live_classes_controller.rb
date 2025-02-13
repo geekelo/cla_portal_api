@@ -3,7 +3,7 @@ module Api
     class ClaLiveClassesController < ApplicationController
       def index
         if params[:filter_id].present?
-          submissions = ClaLiveClass.where("cla_cohort_id = ? OR cla_course_id = ? OR cla_user_id", params[:filter_id], params[:filter_id], params[:filter_id])
+          submissions = ClaLiveClass.where("cla_cohort_id = ? OR cla_course_id = ? OR cla_user_id = ?", params[:filter_id], params[:filter_id], params[:filter_id])
         else
           submissions = ClaLiveClass.all
         end
