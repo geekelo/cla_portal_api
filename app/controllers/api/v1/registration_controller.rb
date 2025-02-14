@@ -17,7 +17,7 @@ module Api
       end
 
       def update
-        if update_params[:email].present? && ClaUser.where.not(id: @user.id).exists?(email: update_params[:email])
+        if update_params[:email].present? && ClaUser.where.not(id: @user.user_id).exists?(email: update_params[:email])
           render json: { error: 'Email already taken' }, status: :conflict
           return
         end
