@@ -1,6 +1,16 @@
 module Api
   module V1
     class ClaTopicsController < ApplicationController
+      def index
+        if params[:cla_course_id].present?
+          topics = ClaTopic.where(cla_course_id: params[:cla_course_id])
+        else
+          topics = ClaTopic.all
+        end
+        
+        render json: topics, each_serializer: ClaTopicSerializer, status: :ok
+      end
+
       def create
         topic = ClaTopic.new(topic_params)
         if topic.save
