@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/sign_in', to: 'authentication#create'
       post '/sign_up', to: 'registration#create'
+      post '/edit_profile', to: 'registration#update'
       resources :cla_users
       resources :cla_roles
       resources :cla_cohorts
