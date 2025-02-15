@@ -2,15 +2,16 @@ module Api
   module V1
     class ClaLiveClassesController < ApplicationController
       def index
-        if params[:filter_id].present?
-          submissions = ClaLiveClass.where("cla_cohort_id = ? OR cla_course_id = ? OR cla_user_id = ?", params[:filter_id], params[:filter_id], params[:filter_id])
-        else
-          submissions = ClaLiveClass.all
-        end
-      
-        render json: submissions, each_serializer:ClaLiveClassSerializer, status: :ok
-      end      
-      
+        submissions = if params[:filter_id].present?
+                        ClaLiveClass.where('cla_cohort_id = ? OR cla_course_id = ? OR cla_user_id = ?',
+                                           params[:filter_id], params[:filter_id], params[:filter_id])
+                      else
+                        ClaLiveClass.all
+                      end
+
+        render json: submissions, each_serializer: ClaLiveClassSerializer, status: :ok
+      end
+
       def create
         live_class = ClaLiveClass.new(live_class_params)
         if live_class.save
@@ -38,7 +39,8 @@ module Api
       private
 
       def live_class_params
-        params.require(:cla_live_class).permit(:name, :date, :time, :duration, :zoom_link, :cla_course_id, :cla_cohort_id, :cla_user_id)
+        params.require(:cla_live_class).permit(:name, :date, :time, :duration, :zoom_link, :cla_course_id,
+                                               :cla_cohort_id, :cla_user_id)
       end
     end
   end

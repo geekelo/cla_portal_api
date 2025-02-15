@@ -3,12 +3,12 @@ module Api
     class ClaRolesController < ApplicationController
       def index
         roles = ClaRole.all
-        render json: { roles: roles }, status: :ok
+        render json: { roles: }, status: :ok
       end
 
       def show
         role = ClaRole.find(params[:id])
-        render json: { role: role }, status: :ok
+        render json: { role: }, status: :ok
       end
 
       def create
@@ -20,7 +20,7 @@ module Api
         end
       end
 
-      def update      
+      def update
         role = ClaRole.find(params[:id])
         if role.update(role_params)
           render json: { message: 'Role updated successfully' }, status: :ok

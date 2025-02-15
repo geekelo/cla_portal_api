@@ -2,26 +2,25 @@ module Api
   module V1
     class ClaCoursesController < ApplicationController
       def index
-        if params[:cla_user_id].present?
-          courses = ClaCourse.where(cla_user_id: params[:cla_user_id])
-        elsif params[:cla_cohort_id].present?
-          courses = ClaCourse.where(cla_cohort_id: params[:cla_cohort_id])
-        else
-          courses = ClaCourse.all
-        end
-      
+        courses = if params[:cla_user_id].present?
+                    ClaCourse.where(cla_user_id: params[:cla_user_id])
+                  elsif params[:cla_cohort_id].present?
+                    ClaCourse.where(cla_cohort_id: params[:cla_cohort_id])
+                  else
+                    ClaCourse.all
+                  end
+
         render json: courses, each_serializer: ClaCourseSerializer, status: :ok
       end
-      
 
       def show
         course = ClaCourse.find(params[:id])
-        render json: { course: course }, status: :ok
+        render json: { course: }, status: :ok
       end
 
       def create
         course = ClaCourse.new(course_params)
-      
+
         if course.save
           render json: course, status: :created
         else
@@ -47,7 +46,7 @@ module Api
 
       def get_course_ids
         course_ids = ClaCourse.where(cla_cohort_id: params[:cla_cohort_id]).pluck(:id)
-        render json: { course_ids: course_ids }, status: :ok
+        render json: { course_ids: }, status: :ok
       end
 
       private

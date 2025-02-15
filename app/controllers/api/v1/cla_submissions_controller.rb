@@ -2,12 +2,13 @@ module Api
   module V1
     class ClaSubmissionsController < ApplicationController
       def index
-        if params[:cla_user_id].present?
-          submissions = ClaSubmission.where("cla_student_id = ? OR cla_facilitator_id = ?", params[:cla_user_id], params[:cla_user_id])
-        else
-          submissions = ClaSubmission.all
-        end      
-      
+        submissions = if params[:cla_user_id].present?
+                        ClaSubmission.where('cla_student_id = ? OR cla_facilitator_id = ?', params[:cla_user_id],
+                                            params[:cla_user_id])
+                      else
+                        ClaSubmission.all
+                      end
+
         render json: submissions, each_serializer: ClaSubmissionSerializer, status: :ok
       end
 

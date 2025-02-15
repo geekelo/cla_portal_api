@@ -33,13 +33,13 @@ module Api
 
       def set_user
         @user = ClaUser.find_by(user_id: params[:id])
-
       rescue ActiveRecord::RecordNotFound
         render json: { error: 'User not found' }, status: :not_found
       end
 
       def sign_up_params
-        params.require(:user).permit(:email, :password, :password_confirmation, :name, :cla_role_id, :cla_cohort_id, :phone_number, :birthday)
+        params.require(:user).permit(:email, :password, :password_confirmation, :name, :cla_role_id, :cla_cohort_id,
+                                     :phone_number, :birthday)
       end
 
       def update_params
@@ -47,7 +47,7 @@ module Api
       end
 
       def email_exists(email)
-        ClaUser.exists?(email: email)
+        ClaUser.exists?(email:)
       end
     end
   end

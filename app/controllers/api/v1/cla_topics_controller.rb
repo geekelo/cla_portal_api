@@ -2,12 +2,12 @@ module Api
   module V1
     class ClaTopicsController < ApplicationController
       def index
-        if params[:cla_course_id].present?
-          topics = ClaTopic.where(cla_course_id: params[:cla_course_id])
-        else
-          topics = ClaTopic.all
-        end
-        
+        topics = if params[:cla_course_id].present?
+                   ClaTopic.where(cla_course_id: params[:cla_course_id])
+                 else
+                   ClaTopic.all
+                 end
+
         render json: topics, each_serializer: ClaTopicSerializer, status: :ok
       end
 
@@ -38,7 +38,7 @@ module Api
       private
 
       def topic_params
-        params.require(:topic).permit(:name, :description, :cla_course_id) 
+        params.require(:topic).permit(:name, :description, :cla_course_id)
       end
     end
   end

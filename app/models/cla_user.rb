@@ -18,16 +18,16 @@ class ClaUser < ApplicationRecord
       timestamp = Time.current.strftime('%H%M%S') # Current time in HHMMSS
       random_letter = ('A'..'Z').to_a.sample # Random uppercase letter
       random_code = SecureRandom.alphanumeric(5).upcase # 5-character alphanumeric
-  
+
       temp_user_id = "CLA#{random_letter}#{timestamp}#{random_code}"
-  
+
       unless ClaUser.exists?(user_id: temp_user_id)
         self.user_id = temp_user_id
         break
       end
     end
   end
-  
+
   # Ensure password validation only when needed
   def password_required?
     new_record? || password.present?

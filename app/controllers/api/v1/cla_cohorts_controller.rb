@@ -3,12 +3,12 @@ module Api
     class ClaCohortsController < ApplicationController
       def index
         cohorts = ClaCohort.all
-        render json: { cohorts: cohorts }, status: :ok
+        render json: { cohorts: }, status: :ok
       end
 
       def show
         cohort = ClaCohort.find(params[:id])
-        render json: { cohort: cohort }, status: :ok
+        render json: { cohort: }, status: :ok
       end
 
       def create
