@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resource :cla_dashboards do
         get :course_stats
         get :score_stats
+        get :assignment_stats
       end
       resources :cla_users
       resources :cla_roles
