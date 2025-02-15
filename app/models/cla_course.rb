@@ -5,7 +5,6 @@ class ClaCourse < ApplicationRecord
   has_many :assignments, class_name: 'ClaAssignment', foreign_key: 'cla_course_id'
   has_many :live_classes, class_name: 'ClaLiveClass', foreign_key: 'cla_course_id'
   has_many :cohorts, class_name: 'ClaCohort', foreign_key: 'cla_cohort_id'
-  belongs_to :cla_user, class_name: 'ClaUser', foreign_key: 'cla_user_id', primary_key: 'user_id'
   
   private
 
