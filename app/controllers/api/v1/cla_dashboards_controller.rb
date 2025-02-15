@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ClaDashboardController < ApplicationController
+    class ClaDashboardsController < ApplicationController
       def course_stats
         cohort_id = params[:cla_cohort_id]
         return render json: { error: "Cohort ID is required" }, status: :unprocessable_entity unless cohort_id
