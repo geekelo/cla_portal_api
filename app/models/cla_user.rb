@@ -10,24 +10,6 @@ class ClaUser < ApplicationRecord
 
   before_create :generate_user_id
 
-  # Method to calculate cohort completion rate
-  def course_completion_rate(cohort_id)
-    total_courses = ClaCourse.where(cla_cohort_id: cohort_id).count
-    completed_courses = ClaCourse
-      .joins(:cla_assignments => :cla_submissions)
-      .where(cla_cohort_id: cohort_id)
-      .distinct
-      .count
-  
-    completion_percentage = total_courses.zero? ? 0 : (completed_courses.to_f / total_courses * 100).round(2)
-  
-    {
-      total_courses: total_courses,
-      completed_courses: completed_courses,
-      completion_percentage: completion_percentage
-    }
-  end
-
   private
 
   # Generate custom user_id if not provided
