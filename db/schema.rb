@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_15_150154) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_15_153313) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -82,9 +82,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_15_150154) do
     t.string "cla_course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "cla_cohort_id"
-    t.string "cla_user_id"
+    t.string "cla_user_id", null: false
+    t.string "cla_cohort_id", null: false
+    t.index ["cla_cohort_id"], name: "index_cla_live_classes_on_cla_cohort_id"
     t.index ["cla_course_id"], name: "index_cla_live_classes_on_cla_course_id"
+    t.index ["cla_user_id"], name: "index_cla_live_classes_on_cla_user_id"
   end
 
   create_table "cla_roles", force: :cascade do |t|
