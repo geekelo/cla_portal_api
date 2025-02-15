@@ -1,8 +1,8 @@
 module ClaDashboardHelper
   # ✅ Calculate cohort completion rate
-  def self.course_completion_rate(cohort_id)
+  def self.course_completion_rate(cohort_id, user_id)
     total_courses = ClaCourse.where(cla_cohort_id: cohort_id).count
-    completed_courses = completed_courses_count(cohort_id)
+    completed_courses = completed_courses_count(cohort_id, user_id)
 
     completion_percentage = total_courses.zero? ? 0 : (completed_courses.to_f / total_courses * 100).round(2)
 
