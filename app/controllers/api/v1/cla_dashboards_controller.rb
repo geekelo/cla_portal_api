@@ -6,7 +6,7 @@ module Api
         user_id = params[:cla_user_id]
         return render json: { error: 'Cohort ID is required' }, status: :unprocessable_entity unless cohort_id
 
-        stats = ClaDashboardHelper.course_completion_rate(cohort_id)
+        stats = ClaDashboardCourseStatsHelper.course_completion_rate(cohort_id, user_id)
         render json: stats, status: :ok
       end
 
