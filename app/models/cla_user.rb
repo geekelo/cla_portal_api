@@ -10,24 +10,6 @@ class ClaUser < ApplicationRecord
 
   before_create :generate_user_id
 
-  private
-
-  # Generate custom user_id if not provided
-  def generate_user_id
-    loop do
-      timestamp = Time.current.strftime('%H%M%S') # Current time in HHMMSS
-      random_letter = ('A'..'Z').to_a.sample # Random uppercase letter
-      random_code = SecureRandom.alphanumeric(5).upcase # 5-character alphanumeric
-  
-      temp_user_id = "CLA#{random_letter}#{timestamp}#{random_code}"
-  
-      unless ClaUser.exists?(user_id: temp_user_id)
-        self.user_id = temp_user_id
-        break
-      end
-    end
-  end
-
   # Method to calculate cohort completion rate
   def course_completion_rate(cohort_id)
     total_courses = ClaCourse.where(cla_cohort_id: cohort_id).count
@@ -44,6 +26,24 @@ class ClaUser < ApplicationRecord
       completed_courses: completed_courses,
       completion_percentage: completion_percentage
     }
+  end
+
+  private
+
+  # Generate custom user_id if not provided
+  def generate_user_id
+    loop do
+      timestamp = Time.current.strftime('%H%M%S') # Current time in HHMMSS
+      random_letter = ('A'..'Z').to_a.sample # Random uppercase letter
+      random_code = SecureRandom.alphanumeric(5).upcase # 5-character alphanumeric
+  
+      temp_user_id = "CLA#{random_letter}#{timestamp}#{random_code}"
+  
+      unless ClaUser.exists?(user_id: temp_user_id)
+        self.user_id = temp_user_id
+        break
+      end
+    end
   end
   
   # Ensure password validation only when needed
