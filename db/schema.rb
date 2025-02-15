@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_15_124815) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_15_150154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -58,13 +58,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_15_124815) do
     t.uuid "topic_id"
     t.uuid "assignment_id"
     t.uuid "live_class_id"
-    t.bigint "cla_user_id"
     t.bigint "cla_cohort_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "start_date"
     t.date "end_date"
     t.boolean "locked", default: false
+    t.string "cla_user_id", null: false
     t.index ["assignment_id"], name: "index_cla_courses_on_assignment_id"
     t.index ["cla_cohort_id"], name: "index_cla_courses_on_cla_cohort_id"
     t.index ["cla_user_id"], name: "index_cla_courses_on_cla_user_id"
