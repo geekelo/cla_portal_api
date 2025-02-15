@@ -64,7 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_15_150154) do
     t.date "start_date"
     t.date "end_date"
     t.boolean "locked", default: false
-    t.string "cla_user_id", null: false
+    t.string "cla_user_id", default: "", null: false
     t.index ["assignment_id"], name: "index_cla_courses_on_assignment_id"
     t.index ["cla_cohort_id"], name: "index_cla_courses_on_cla_cohort_id"
     t.index ["cla_user_id"], name: "index_cla_courses_on_cla_user_id"

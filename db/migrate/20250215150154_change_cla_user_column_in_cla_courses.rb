@@ -4,7 +4,7 @@ class ChangeClaUserColumnInClaCourses < ActiveRecord::Migration[7.1]
     remove_reference :cla_courses, :cla_user, foreign_key: false, index: true
 
     # Add a new cla_user_id column as a string, not allowing null values
-    add_column :cla_courses, :cla_user_id, :string, null: false
+    add_column :cla_courses, :cla_user_id, :string, null: false, default: ''
     add_index :cla_courses, :cla_user_id
   end
 
