@@ -19,6 +19,10 @@ Rails.application.routes.draw do
       post '/sign_in', to: 'authentication#create'
       post '/sign_up', to: 'registration#create'
       put '/edit_profile', to: 'registration#update'
+
+      resource :dashboard do
+        get :course_stats
+      end
       resources :cla_users
       resources :cla_roles
       resources :cla_cohorts

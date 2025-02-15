@@ -1,6 +1,6 @@
 class ClaDashboardController < ApplicationController
   def course_stats
-    cohort_id = params[:cohort_id]
+    cohort_id = params[:cla_cohort_id]
     return render json: { error: "Cohort ID is required" }, status: :unprocessable_entity unless cohort_id
 
     stats = ClaDashboardHelper.course_completion_rate(cohort_id)
