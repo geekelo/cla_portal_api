@@ -14,16 +14,38 @@ class ClaUser < ApplicationRecord
 
   # Generate custom user_id if not provided
   def generate_user_id
-    timestamp = Time.current.strftime('%H%M%S') # Gets current time in HHMMSS format
-    random_letter = ('A'..'Z').to_a.sample # Random uppercase letter
-    random_code = SecureRandom.alphanumeric(5).upcase # Generate 5-character alphanumeric
-
-    self.user_id ||= "CLA#{random_letter}#{timestamp}#{random_code}"
-
-    # Ensure uniqueness
-    generate_user_id if ClaUser.exists?(user_id: self.user_id)
+    loop do
+      timestamp = Time.current.strftime('%H%M%S') # Current time in HHMMSS
+      random_letter = ('A'..'Z').to_a.sample # Random uppercase letter
+      random_code = SecureRandom.alphanumeric(5).upcase # 5-character alphanumeric
+  
+      temp_user_id = "CLA#{random_letter}#{timestamp}#{random_code}"
+  
+      unless ClaUser.exists?(user_id: temp_user_id)
+        self.user_id = temp_user_id
+        break
+      end
+    end
   end
 
+  # Method to calculate cohort completion rate
+  def course_completion_rate(cohort_id)
+    total_courses = ClaCourse.where(cla_cohort_id: cohort_id).count
+    completed_courses = ClaCourse
+      .joins(:cla_assignments => :cla_submissions)
+      .where(cla_cohort_id: cohort_id)
+      .distinct
+      .count
+  
+    completion_percentage = total_courses.zero? ? 0 : (completed_courses.to_f / total_courses * 100).round(2)
+  
+    {
+      total_courses: total_courses,
+      completed_courses: completed_courses,
+      completion_percentage: completion_percentage
+    }
+  end
+  
   # Ensure password validation only when needed
   def password_required?
     new_record? || password.present?
