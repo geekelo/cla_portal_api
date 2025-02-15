@@ -1,6 +1,6 @@
 module ClaDashboardScoreStatsHelper
   def self.user_score_percentage(user_id)
-    user = ClaUser.find_by(id: user_id)
+    user = ClaUser.find_by(cla_user_id: user_id)
     return { error: "User not found" } unless user
     return { error: "User is not assigned to any cohort" } unless user.cla_cohort_id
 
