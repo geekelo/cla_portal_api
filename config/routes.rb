@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       post '/sign_up', to: 'registration#create'
       put '/edit_profile', to: 'registration#update'
 
-      resource :dashboard do
+      resource :cla_dashboards do
         get :course_stats
       end
       resources :cla_users
