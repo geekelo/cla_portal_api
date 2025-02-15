@@ -16,7 +16,7 @@ module ClaDashboardScoreStatsHelper
     total_possible_score = cohort_assignment_ids.count * 100
 
     # 4. Get the sum of scores from all submissions for this user
-    total_user_score = ClaSubmission.where(cla_user_id: user_id, cla_assignment_id: cohort_assignment_ids)
+    total_user_score = ClaSubmission.where(cla_student_id: user_id, cla_assignment_id: cohort_assignment_ids)
                                     .sum(:score)
 
     # 5. Calculate the percentage score
