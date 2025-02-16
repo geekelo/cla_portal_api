@@ -1,10 +1,6 @@
 module Api
   module V1
     class ClaAttendancesController < ApplicationController
-      before_action :find_live_class
-      before_action :find_user
-      before_action :find_cohort
-
       def create
         attendance = Attendance.new(attendance_params)
         
@@ -41,7 +37,7 @@ module Api
       end
 
       def find_user
-        @user = ClaUser.find_by(id: params[:cla_user_id])
+        @user = ClaUser.find_by(user_id: params[:cla_user_id])
         return render json: { error: 'User not found' }, status: :not_found unless @user
       end
 
