@@ -1,8 +1,8 @@
 module ClaDashboardAssignmentStatsHelper
   def self.user_submission_percentage(user_id)
-    user = ClaUser.find_by(user_id: user_id)
-    return { error: "User not found" } unless user
-    return { error: "User is not assigned to any cohort" } unless user.cla_cohort_id
+    user = ClaUser.find_by(user_id:)
+    return { error: 'User not found' } unless user
+    return { error: 'User is not assigned to any cohort' } unless user.cla_cohort_id
 
     cohort_id = user.cla_cohort_id
 
@@ -22,9 +22,9 @@ module ClaDashboardAssignmentStatsHelper
     submission_percentage = total_assignments.zero? ? 0 : (total_submissions.to_f / total_assignments * 100).round(2)
 
     {
-      total_submissions: total_submissions,
-      total_assignments: total_assignments,
-      submission_percentage: submission_percentage
+      total_submissions:,
+      total_assignments:,
+      submission_percentage:
     }
   end
 end

@@ -41,9 +41,9 @@ module Api
         live_classes = ClaLiveClass.where(date: today)
 
         if live_classes.any?
-          render json: { live_classes: live_classes }, status: :ok
+          render json: { live_classes: }, status: :ok
         else
-          render json: { message: "No live classes scheduled for today." }, status: :ok
+          render json: { message: 'No live classes scheduled for today.' }, status: :ok
         end
       end
 

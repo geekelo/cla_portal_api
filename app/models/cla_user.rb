@@ -11,7 +11,7 @@ class ClaUser < ApplicationRecord
   has_many :cla_attendances
   has_many :cla_live_classes, through: :cla_attendances
   has_many :cla_submissions
-  has_many :cla_courses 
+  has_many :cla_courses
 
   before_create :generate_user_id
 

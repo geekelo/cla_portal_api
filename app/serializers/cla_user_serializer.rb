@@ -4,11 +4,11 @@ class ClaUserSerializer < ActiveModel::Serializer
 
   def id
     object&.user_id
-  end    
-  
+  end
+
   def default_id
     object&.id
-  end    
+  end
 
   def cla_cohort_name
     object&.cla_cohort&.name

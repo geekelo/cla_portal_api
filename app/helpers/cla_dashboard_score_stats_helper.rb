@@ -1,8 +1,8 @@
 module ClaDashboardScoreStatsHelper
   def self.user_score_percentage(user_id)
-    user = ClaUser.find_by(user_id: user_id)
-    return { error: "User not found" } unless user
-    return { error: "User is not assigned to any cohort" } unless user.cla_cohort_id
+    user = ClaUser.find_by(user_id:)
+    return { error: 'User not found' } unless user
+    return { error: 'User is not assigned to any cohort' } unless user.cla_cohort_id
 
     cohort_id = user.cla_cohort_id
 
@@ -17,15 +17,15 @@ module ClaDashboardScoreStatsHelper
 
     # 4. Get the sum of scores from all submissions for this user
     total_user_score = ClaSubmission.where(cla_student_id: user_id, cla_assignment_id: cohort_assignment_ids)
-                                    .sum(:score)
+      .sum(:score)
 
     # 5. Calculate the percentage score
     score_percentage = total_possible_score.zero? ? 0 : (total_user_score.to_f / total_possible_score * 100).round(2)
 
     {
-      total_user_score: total_user_score,
-      total_possible_score: total_possible_score,
-      score_percentage: score_percentage
+      total_user_score:,
+      total_possible_score:,
+      score_percentage:
     }
   end
 end
