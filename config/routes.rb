@@ -41,7 +41,11 @@ Rails.application.routes.draw do
           get :today_classes
         end
       end
-      resources :cla_attendances
+      resources :cla_attendances do
+        collection do
+          get :missing_attendance
+        end
+      end
     end
   end
 
