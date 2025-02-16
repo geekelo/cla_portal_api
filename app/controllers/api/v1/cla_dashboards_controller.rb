@@ -40,6 +40,7 @@ module Api
 
         stats = ClaDashboardDeskStatsHelper.user_desk_stats(cohort_id)
         render json: stats, status: :ok
+      end
     end
   end
 end
