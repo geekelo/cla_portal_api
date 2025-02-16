@@ -53,23 +53,22 @@ module Api
       def student_details
         cohort_id = params[:cla_cohort_id]
         user_id = params[:cla_user_id]
-        return render json: { error: 'Cohort ID and User ID is required' }, status: :unprocessable_entity unless cohort_id && user_id
-
+        return render json: { error: 'Cohort ID and User ID are required' }, status: :unprocessable_entity unless cohort_id && user_id
+      
         student = ClaDashboardStudentDetailsHelper.student_details(user_id)
         course_completion_rate_stats = ClaDashboardCourseStatsHelper.course_completion_rate(cohort_id, user_id)
         user_score_percentage_stats = ClaDashboardScoreStatsHelper.user_score_percentage(user_id)
         user_submission_percentage_stats = ClaDashboardAssignmentStatsHelper.user_submission_percentage(user_id)
         user_attendance_percentage_stats = ClaDashboardAttendanceStatsHelper.user_attendance_percentage(user_id)
-
-
-        render json: {[
-          student,
-          course_completion_rate_stats,
-          user_score_percentage_stats,
-          user_submission_percentage_stats,
-          user_attendance_percentage_stats
-        ]}, status: :ok
-      end
+      
+        render json: {
+          student: student,
+          course_completion_rate: course_completion_rate_stats,
+          user_score_percentage: user_score_percentage_stats,
+          user_submission_percentage: user_submission_percentage_stats,
+          user_attendance_percentage: user_attendance_percentage_stats
+        }, status: :ok
+      end      
     end
   end
 end
