@@ -10,7 +10,7 @@ module Api
           render json: { error: attendance.errors.full_messages }, status: :unprocessable_entity
         end
       end
-      
+
       def missing_attendance
         cla_live_class_id = params[:cla_live_class_id]
         cla_cohort_id = params[:cla_cohort_id]
@@ -23,11 +23,13 @@ module Api
         # Get user IDs already marked in attendance for this live class
         recorded_user_ids = ClaAttendance.where(cla_live_class_id: cla_live_class_id).pluck(:cla_user_id).map(&:to_s)
       
-        # Get users who are NOT in the attendance table
+        # Get users who do NOT exist in the attendance table for the given live class
         missing_users = cohort_users.where.not(id: recorded_user_ids.map(&:to_s))
       
         render json: { missing_users: missing_users }, status: :ok
-      end      
+      end
+      
+  
 
       private
 
