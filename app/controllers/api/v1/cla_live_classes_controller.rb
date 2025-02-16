@@ -38,7 +38,7 @@ module Api
 
       def today_classes
         today = Time.zone.today
-        live_classes = ClaLiveClass.where("DATE(start_time) = ?", today)
+        live_classes = ClaLiveClass.where(date: today)
 
         if live_classes.any?
           render json: { live_classes: live_classes }, status: :ok
