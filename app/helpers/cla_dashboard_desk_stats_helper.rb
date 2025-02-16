@@ -1,5 +1,5 @@
 module ClaDashboardDeskStatsHelper
-  def user_desk_stats(cohort_id)
+  def self.user_desk_stats(cohort_id)
     # Get total courses for the cohort
     total_courses = ClaCourse.where(cla_cohort_id: cohort_id).count
 
