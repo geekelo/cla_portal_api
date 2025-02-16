@@ -25,6 +25,14 @@ module Api
         stats = ClaDashboardAssignmentStatsHelper.user_submission_percentage(user_id)
         render json: stats, status: :ok
       end
+
+      def attendance_stats
+        user_id = params[:cla_user_id]
+        return render json: { error: 'User ID is required' }, status: :unprocessable_entity unless user_id
+
+        stats = ClaDashboardAttendanceStatsHelper.user_attendance_percentage(user_id)
+        render json: stats, status: :ok
+      end
     end
   end
 end
