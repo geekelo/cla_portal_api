@@ -36,7 +36,12 @@ Rails.application.routes.draw do
       resources :cla_topics
       resources :cla_assignments
       resources :cla_submissions
-      resources :cla_live_classes
+      resources :cla_live_classes do
+        collection do
+          get :today_classes
+        end
+      end
+      resources :cla_attendances
     end
   end
 

@@ -36,6 +36,17 @@ module Api
         render json: { message: 'Live class deleted successfully' }, status: :ok
       end
 
+      def today_classes
+        today = Time.zone.today
+        live_classes = ClaLiveClass.where("DATE(start_time) = ?", today)
+
+        if live_classes.any?
+          render json: { live_classes: live_classes }, status: :ok
+        else
+          render json: { message: "No live classes scheduled for today." }, status: :ok
+        end
+      end
+
       private
 
       def live_class_params
