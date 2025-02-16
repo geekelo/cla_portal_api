@@ -33,6 +33,13 @@ module Api
         stats = ClaDashboardAttendanceStatsHelper.user_attendance_percentage(user_id)
         render json: stats, status: :ok
       end
+
+      def desk_stats
+        cohort_id = params[:cla_cohort_id]
+        return render json: { error: 'User ID is required' }, status: :unprocessable_entity unless cohort_id
+
+        stats = ClaDashboardDeskStatsHelper.user_desk_stats(cohort_id)
+        render json: stats, status: :ok
     end
   end
 end

@@ -24,6 +24,8 @@ Rails.application.routes.draw do
         get :course_stats
         get :score_stats
         get :assignment_stats
+        get :attendance_stats
+        get :desk_stats
       end
       resources :cla_users
       resources :cla_roles

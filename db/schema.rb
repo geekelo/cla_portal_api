@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_15_150154) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_16_170341) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -29,14 +29,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_15_150154) do
   end
 
   create_table "cla_attendances", force: :cascade do |t|
-    t.bigint "cla_live_class_id"
-    t.bigint "cla_user_id"
     t.bigint "cla_cohort_id"
     t.boolean "present", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cla_live_class_id", default: "", null: false
+    t.string "cla_user_id", default: "", null: false
     t.index ["cla_cohort_id"], name: "index_cla_attendances_on_cla_cohort_id"
-    t.index ["cla_live_class_id", "cla_user_id"], name: "index_cla_attendances_on_cla_live_class_id_and_cla_user_id", unique: true
     t.index ["cla_live_class_id"], name: "index_cla_attendances_on_cla_live_class_id"
     t.index ["cla_user_id"], name: "index_cla_attendances_on_cla_user_id"
   end
@@ -79,11 +78,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_15_150154) do
     t.time "time", null: false
     t.string "duration", null: false
     t.string "zoom_link", null: false
-    t.uuid "cla_course_id", null: false
+    t.string "cla_course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "cla_user_id"
-    t.bigint "cla_cohort_id"
+    t.string "cla_cohort_id", null: false
+    t.string "cla_user_id", default: "", null: false
     t.index ["cla_cohort_id"], name: "index_cla_live_classes_on_cla_cohort_id"
     t.index ["cla_course_id"], name: "index_cla_live_classes_on_cla_course_id"
     t.index ["cla_user_id"], name: "index_cla_live_classes_on_cla_user_id"
@@ -136,6 +135,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_15_150154) do
     t.index ["email"], name: "index_cla_users_on_email", unique: true
   end
 
-  add_foreign_key "cla_live_classes", "cla_courses"
   add_foreign_key "cla_users", "cla_roles"
 end
