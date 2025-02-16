@@ -41,6 +41,14 @@ module Api
         stats = ClaDashboardDeskStatsHelper.user_desk_stats(cohort_id)
         render json: stats, status: :ok
       end
+
+      def student_list
+        cohort_id = params[:cla_cohort_id]
+        return render json: { error: 'Cohort ID is required' }, status: :unprocessable_entity unless cohort_id
+
+        students = ClaDashboardStudentListHelper.student_list(cohort_id)
+        render json: students, status: :ok
+      end
     end
   end
 end
