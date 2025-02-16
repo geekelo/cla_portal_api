@@ -17,7 +17,7 @@ module ClaDashboardDeskStatsHelper
     total_users = ClaUser.where("cla_cohort_id::text = ?", cohort_id).count
 
     # Get total submissions without scores
-    total_submissions_without_score = ClaSubmission.where(cla_score: nil)
+    total_submissions_without_score = ClaSubmission.where(score: nil)
                                                    .joins("INNER JOIN cla_assignments ON cla_assignments.id::text = cla_submissions.cla_assignment_id::text")
                                                    .joins("INNER JOIN cla_courses ON cla_courses.id::text = cla_assignments.cla_course_id::text")
                                                    .where("cla_courses.cla_cohort_id::text = ?", cohort_id)
