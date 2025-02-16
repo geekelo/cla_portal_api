@@ -27,6 +27,7 @@ Rails.application.routes.draw do
         get :attendance_stats
         get :desk_stats
         get :student_list
+        get :student_details
       end
       resources :cla_users
       resources :cla_roles
