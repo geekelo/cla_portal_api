@@ -1,7 +1,6 @@
 module ClaDashboardDeskStatsHelper
   def self.user_desk_stats(cohort_id)
-    # Ensure cohort_id is in UUID format
-    cohort_id = cohort_id.to_s
+    cohort_id = cohort_id.to_s  # Ensure it's a string
 
     # Get total courses for the cohort
     total_courses = ClaCourse.where("cla_cohort_id::text = ?", cohort_id).count
@@ -20,7 +19,8 @@ module ClaDashboardDeskStatsHelper
     # Get total submissions without scores
     total_submissions_without_score = ClaSubmission.where(cla_score: nil)
                                                    .joins(:cla_assignment)
-                                                   .where("cla_assignments.cla_course_id IN (?)", ClaCourse.where("cla_cohort_id::text = ?", cohort_id).select(:id))
+                                                   .where("cla_assignments.cla_course_id::text IN (?)", 
+                                                          ClaCourse.where("cla_cohort_id::text = ?", cohort_id).select(:id).map(&:id))
                                                    .count
 
     {
