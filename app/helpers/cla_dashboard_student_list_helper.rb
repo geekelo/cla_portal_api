@@ -4,7 +4,6 @@ module ClaDashboardStudentListHelper
 
     # Get all students in the cohort
     students = ClaUser.where("cla_cohort_id::text = ?", cohort_id)
-                      .where(cla_role: { name: 'student' })
                       .order(:name)
                       .map do |student|
                         {
