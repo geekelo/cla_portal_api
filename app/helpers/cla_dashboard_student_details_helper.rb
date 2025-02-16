@@ -17,4 +17,5 @@ module ClaDashboardStudentDetailsHelper
                         }
 
     student
+  end
 end
