@@ -1,5 +1,5 @@
 module ClaDashboardAttendanceStatsHelper
-  def user_attendance_percentage(user_id)
+  def self.user_attendance_percentage(user_id)
     total_classes = ClaAttendance.where(cla_user_id: user_id).count
     total_present = ClaAttendance.where(cla_user_id: user_id, present: true).count
 
