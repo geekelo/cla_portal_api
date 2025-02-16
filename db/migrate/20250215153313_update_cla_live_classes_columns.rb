@@ -26,18 +26,20 @@ class UpdateClaLiveClassesColumns < ActiveRecord::Migration[7.1]
   end
 
   def down
-    # Revert cla_course_id back to uuid and re-add its foreign key.
-    change_column :cla_live_classes, :cla_course_id, :uuid
+    # Revert cla_course_id back to uuid with explicit casting
+    change_column :cla_live_classes, :cla_course_id, 'uuid USING cla_course_id::uuid'
+  
+    # Re-add the foreign key
     add_foreign_key :cla_live_classes, :cla_courses, column: :cla_course_id
-
+  
     # Remove the new string columns and their indexes.
     remove_index :cla_live_classes, :cla_user_id
     remove_column :cla_live_classes, :cla_user_id
     remove_index :cla_live_classes, :cla_cohort_id
     remove_column :cla_live_classes, :cla_cohort_id
-
+  
     # Re-add the original reference columns for cla_user and cla_cohort.
     add_reference :cla_live_classes, :cla_user, type: :uuid, foreign_key: false, null: true, index: true
     add_reference :cla_live_classes, :cla_cohort, foreign_key: false, null: true, index: true
-  end
+  end  
 end
