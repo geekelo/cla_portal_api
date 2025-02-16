@@ -2,7 +2,7 @@ module Api
   module V1
     class ClaAttendancesController < ApplicationController
       def create
-        attendance = Attendance.new(attendance_params)
+        attendance = ClaAttendance.new(attendance_params)
         
         if attendance.save
           render json: { message: 'Attendance recorded successfully', attendance: attendance }, status: :created
