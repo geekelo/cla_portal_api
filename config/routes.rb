@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       post '/sign_in', to: 'authentication#create'
       post '/sign_up', to: 'registration#create'
       put '/edit_profile', to: 'registration#update'
+      post '/forgot_password', to: 'passwords#forgot_password'
+      post '/reset_password', to: 'passwords#reset_password'
 
       resource :cla_dashboards do
         get :course_stats

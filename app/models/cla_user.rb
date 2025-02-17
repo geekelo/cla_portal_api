@@ -14,6 +14,24 @@ class ClaUser < ApplicationRecord
   has_many :cla_courses
 
   before_create :generate_user_id
+  before_create :generate_reset_password_token
+
+  def generate_reset_password_token
+    self.reset_password_token = SecureRandom.hex(10)
+    self.reset_password_sent_at = Time.current
+    save!
+  end
+
+  def password_reset_token_valid?
+    reset_password_sent_at >= 2.hours.ago
+  end
+
+  def reset_password!(new_password)
+    self.password = new_password
+    self.reset_password_token = nil
+    self.reset_password_sent_at = nil
+    save!
+  end
 
   private
 
