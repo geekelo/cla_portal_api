@@ -76,3 +76,5 @@ gem 'active_model_serializers'
 gem 'bcrypt'
 gem 'jwt'
 gem 'rack-cors'
+
+gem "letter_opener", "~> 1.10"
