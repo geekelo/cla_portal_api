@@ -1,7 +1,6 @@
 module Api
   module V1
     class AuthenticationController < ApplicationController
-      skip_before_action :verify_authenticity_token
       def create
         user = ClaUser.find_by(email: sign_in_params[:email])
         if user&.authenticate(sign_in_params[:password])

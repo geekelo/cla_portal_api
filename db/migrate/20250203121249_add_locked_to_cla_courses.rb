@@ -1,0 +1,9 @@
+class AddLockedToClaCourses < ActiveRecord::Migration[7.1]
+  def up
+    add_column :cla_courses, :locked, :boolean, default: false, null: true
+  end
+
+  def down
+    remove_column :cla_courses, :locked
+  end
+end
