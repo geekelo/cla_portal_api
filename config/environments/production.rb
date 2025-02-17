@@ -116,26 +116,28 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   
   # Combine all default options into a single hash
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "cla.jjrsf.org",
+    user_name: Rails.application.credentials.dig(:email, :user_name),
+    password: Rails.application.credentials.dig(:email, :password),
+    authentication: "plain",
+    enable_starttls_auto: true,
+    tls: true,
+    ssl: true,
+    openssl_verify_mode: "peer" # Secure setting
+  }
+  
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  
   config.action_mailer.default_options = {
     from: "bell@gmail.com",
     reply_to: "efuelight12@gmail.com",
     cc: "delightolga12@gmail.com",
     bcc: "otistories@gmail.com"
   }
-  
-  # Single `delivery_method_options` hash
-  config.action_mailer.delivery_method_options = {
-    user_name: "JJRSF CLA",
-    password: "cla.jjrsf.org",
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "cla.jjrsf.org",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    tls: true,
-    ssl: true,
-    openssl_verify_mode: "peer" # Choose one, "peer" is more secure
-  }
-  
-
 end
