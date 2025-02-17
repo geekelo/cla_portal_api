@@ -42,7 +42,7 @@ module Api
         render json: stats, status: :ok
       end
 
-      def students_with_details
+      def student_list
         cohort_id = params[:cla_cohort_id]
         return render json: { error: 'Cohort ID is required' }, status: :unprocessable_entity unless cohort_id
       
