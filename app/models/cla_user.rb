@@ -37,20 +37,26 @@ class ClaUser < ApplicationRecord
 
   # Generate custom user_id if not provided
   def generate_user_id
+    attempts = 0
+    max_attempts = 100 # Max attempts before giving up
+    
     loop do
       timestamp = Time.current.strftime('%H%M%S') # Current time in HHMMSS
       random_letter = ('A'..'Z').to_a.sample # Random uppercase letter
       random_code = SecureRandom.alphanumeric(5).upcase # 5-character alphanumeric
-
+  
       temp_user_id = "CLA#{random_letter}#{timestamp}#{random_code}"
-
+  
       unless ClaUser.exists?(user_id: temp_user_id)
         self.user_id = temp_user_id
         break
       end
+  
+      attempts += 1
+      break if attempts >= max_attempts # Break after max attempts to avoid infinite loop
     end
   end
-
+  
   # Ensure password validation only when needed
   def password_required?
     new_record? || password.present?
