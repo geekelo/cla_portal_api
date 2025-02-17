@@ -19,7 +19,6 @@ class ClaUser < ApplicationRecord
   def generate_reset_password_token
     self.reset_password_token = SecureRandom.hex(10)
     self.reset_password_sent_at = Time.current
-    save!
   end
 
   def password_reset_token_valid?
