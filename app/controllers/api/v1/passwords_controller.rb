@@ -8,7 +8,7 @@ module Api
           user = ClaUser.find_by(email: params[:email])
           if user
             user.generate_reset_password_token
-            PasswordMailer.with(user: user).forgot_password.deliver_later
+            PasswordMailer.with(user: user).forgot_password.deliver_now
             render json: { message: "Reset password instructions sent to #{user.email}" }, status: :ok
           else
             render json: { error: "Email not found" }, status: :not_found
