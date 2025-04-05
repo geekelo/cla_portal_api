@@ -87,3 +87,7 @@ production:
   database: cla_portal_api_production
   username: cla_portal_api
   password: <%= ENV["CLA_PORTAL_API_DATABASE_PASSWORD"] %>
+
+  prepaered_statements: false
+  # The database role being used to connect to PostgreSQL.
+  
