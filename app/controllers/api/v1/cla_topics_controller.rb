@@ -6,10 +6,10 @@ module Api
                    ClaTopic.where(cla_course_id: params[:cla_course_id])
                  else
                    ClaTopic.all
-                 end
-
+                 end.order(created_at: :asc) # or :asc for oldest first
+      
         render json: topics, each_serializer: ClaTopicSerializer, status: :ok
-      end
+      end      
 
       def create
         topic = ClaTopic.new(topic_params)

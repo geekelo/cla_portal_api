@@ -7,7 +7,7 @@ module Api
                                            params[:filter_id], params[:filter_id], params[:filter_id])
                       else
                         ClaLiveClass.all
-                      end
+                      end.order(created_at: :desc) # or :asc for oldest first
 
         render json: submissions, each_serializer: ClaLiveClassSerializer, status: :ok
       end
