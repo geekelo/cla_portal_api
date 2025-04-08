@@ -8,7 +8,7 @@ module Api
                     ClaCourse.where(cla_cohort_id: params[:cla_cohort_id])
                   else
                     ClaCourse.all
-                  end.order(created_at: :desc) # or :asc for oldest first
+                  end.order(created_at: :asc) # or :asc for oldest first
 
         render json: courses, each_serializer: ClaCourseSerializer, status: :ok
       end
