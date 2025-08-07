@@ -12,8 +12,8 @@ class ClaUser < ApplicationRecord
   has_many :cla_live_classes, through: :cla_attendances
   has_many :cla_submissions
   has_many :cla_courses
-  has_many :cla_cbts_scores, optional: true
-  has_many :cla_contributions_scores, optional: true
+  has_many :cla_cbts_scores
+  has_many :cla_contributions_scores
 
   before_create :generate_user_id
   before_create :generate_reset_password_token
