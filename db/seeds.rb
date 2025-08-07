@@ -47,7 +47,7 @@ admin_user.assign_attributes(
   name: 'Admin User',
   password: admin_password,
   password_confirmation: admin_password,
-  cla_role_id: nil,
+  cla_role_id: 2,
   cla_cohort_id: nil
 )
 admin_user.save!

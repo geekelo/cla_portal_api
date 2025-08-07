@@ -7,4 +7,5 @@ class ClaCohort < ApplicationRecord
   has_many :courses, class_name: 'ClaCourse', foreign_key: 'cla_cohort_id'
 
   has_many :cla_attendances
+  has_many :cla_submissions, optional: true
 end

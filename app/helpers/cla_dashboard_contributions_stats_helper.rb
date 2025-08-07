@@ -1,0 +1,23 @@
+module ClaDashboardContributionsStatsHelper
+  def self.user_contributions_stats(user_id, course_id)
+    user = ClaUser.find_by(user_id:)
+    return { error: 'User not found' } unless user
+    return { error: 'User is not assigned to any cohort' } unless user.cla_cohort_id
+
+    cohort_id = user.cla_cohort_id
+
+    # Get total contributions scores of user
+    total_contributions_scores = ClaContributionsScores.where(cla_user_id: user_id, cla_course_id: course_id).sum(:score)
+
+    total_contributions_percentage = total_contributions_scores.zero? ? 0 : (total_contributions_scores.to_f / total_contributions_scores * 100).round(2)
+
+    # Get contributions points
+    contributions_points = ((total_contributions_percentage * 25)/100).round(2)
+
+    {
+      total_contributions_scores:,
+      total_contributions_percentage:,
+      contributions_points:
+    }
+  end
+end

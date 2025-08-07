@@ -23,12 +23,24 @@ module ClaDashboardDeskStatsHelper
       .where('cla_courses.cla_cohort_id::text = ?', cohort_id)
       .count
 
+    # Get total students without cbts scores
+    total_students_cbts_without_score = ClaUser.where('cla_cohort_id::text = ?', cohort_id)
+      .where.not(id: ClaCbtScores.pluck(:cla_user_id))
+      .count
+
+    # Get total contributions without scores
+    total_contributions_without_score = ClaUser.where('cla_cohort_id::text = ?', cohort_id)
+      .where.not(id: ClaContributionsScores.pluck(:cla_user_id))
+      .count
+
     {
       total_courses:,
       total_assignments:,
       total_live_classes:,
       total_users:,
-      total_submissions_without_score:
+      total_submissions_without_score:,
+      total_students_cbts_without_score:,
+      total_contributions_without_score:
     }
   end
 end
