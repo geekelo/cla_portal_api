@@ -52,6 +52,10 @@ Rails.application.routes.draw do
           get :missing_attendance
         end
       end
+      resources :cla_cbts
+      resources :cla_cbts_scores
+      resources :cla_contributions
+      resources :cla_contributions_scores
     end
   end
 
