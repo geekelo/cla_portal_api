@@ -3,13 +3,13 @@ class Api::V1::ClaCbtsScoresController < ApplicationController
 
   def index
     cbts_scores = if params[:cla_user_id].present?
-      ClaCbtScore.where(cla_user_id: params[:cla_user_id])
+      ClaCbtsScore.where(cla_user_id: params[:cla_user_id])
     elsif params[:cla_cbt_id].present?
-      ClaCbtScore.where(cla_cbt_id: params[:cla_cbt_id])
+      ClaCbtsScore.where(cla_cbt_id: params[:cla_cbt_id])
     elsif params[:cla_cohort_id].present?
-      ClaCbtScore.where(cla_cohort_id: params[:cla_cohort_id])
+      ClaCbtsScore.where(cla_cohort_id: params[:cla_cohort_id])
     else
-      ClaCbtScore.all
+      ClaCbtsScore.all
     end
     render json: cbts_scores, each_serializer: ClaCbtsScoreSerializer, status: :ok
   end
@@ -24,7 +24,7 @@ class Api::V1::ClaCbtsScoresController < ApplicationController
   end
 
   def update
-    cbt_score = ClaCbtScore.find(params[:id])
+    cbt_score = ClaCbtsScore.find(params[:id])
     if cbt_score.update(cbt_score_params)
       render json: cbt_score, each_serializer: ClaCbtsScoreSerializer, status: :ok
     else
