@@ -30,7 +30,7 @@ module ClaDashboardDeskStatsHelper
 
     # Get total contributions without scores
     total_contributions_without_score = ClaUser.where('cla_cohort_id::text = ?', cohort_id)
-      .where.not(id: ClaContributionsScores.pluck(:cla_user_id))
+      .where.not(id: ClaContributionsScore.pluck(:cla_user_id))
       .count
 
     {

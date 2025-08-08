@@ -7,7 +7,7 @@ module ClaDashboardContributionsStatsHelper
     cohort_id = user.cla_cohort_id
 
     # Get total contributions scores of user
-    total_contributions_scores = ClaContributionsScores.where(cla_user_id: user_id, cla_course_id: course_id).sum(:score)
+    total_contributions_scores = ClaContributionsScore.where(cla_user_id: user_id, cla_course_id: course_id).sum(:score)
 
     total_contributions_percentage = total_contributions_scores.zero? ? 0 : (total_contributions_scores.to_f / total_contributions_scores * 100).round(2)
 
