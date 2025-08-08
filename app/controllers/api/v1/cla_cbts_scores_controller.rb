@@ -11,13 +11,13 @@ class Api::V1::ClaCbtsScoresController < ApplicationController
     else
       ClaCbtScore.all
     end
-    render json: cbts_scores, each_serializer: ClaCbtScoreSerializer, status: :ok
+    render json: cbts_scores, each_serializer: ClaCbtsScoreSerializer, status: :ok
   end
 
   def create
     cbt_score = @cbt.cla_cbts_scores.new(cbt_score_params)
     if cbt_score.save
-      render json: cbt_score, each_serializer: ClaCbtScoreSerializer, status: :created
+      render json: cbt_score, each_serializer: ClaCbtsScoreSerializer, status: :created
     else
       render json: { errors: cbt_score.errors.full_messages }, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class Api::V1::ClaCbtsScoresController < ApplicationController
   def update
     cbt_score = ClaCbtScore.find(params[:id])
     if cbt_score.update(cbt_score_params)
-      render json: cbt_score, each_serializer: ClaCbtScoreSerializer, status: :ok
+      render json: cbt_score, each_serializer: ClaCbtsScoreSerializer, status: :ok
     else
       render json: { errors: cbt_score.errors.full_messages }, status: :unprocessable_entity
     end
