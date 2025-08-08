@@ -25,7 +25,7 @@ module ClaDashboardDeskStatsHelper
 
     # Get total students without cbts scores
     total_students_cbts_without_score = ClaUser.where('cla_cohort_id::text = ?', cohort_id)
-      .where.not(id: ClaCbtScores.pluck(:cla_user_id))
+      .where.not(id: ClaCbtsScores.pluck(:cla_user_id))
       .count
 
     # Get total contributions without scores
