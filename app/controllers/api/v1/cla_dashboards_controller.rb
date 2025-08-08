@@ -93,7 +93,7 @@ module Api
                 user_submission_percentage: ClaDashboardAssignmentStatsHelper.user_submission_percentage(user_id, course_id),
                 user_attendance_percentage: ClaDashboardAttendanceStatsHelper.user_attendance_percentage(user_id, course_id),
                 user_cbt_stats: ClaDashboardCbtStatsHelper.user_cbt_stats(user_id, course_id),
-                user_contribution_stats: ClaDashboardContributionsStatsHelper.user_contribution_stats(user_id, course_id)
+                user_contribution_stats: ClaDashboardContributionsStatsHelper.user_contributions_stats(user_id, course_id)
               }
             end
           }
