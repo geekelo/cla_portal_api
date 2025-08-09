@@ -35,7 +35,7 @@ module Api
       private
 
       def attendance_params
-        params.require(:cla_attendance).permit(:cla_live_class_id, :cla_user_id, :cla_cohort_id, :present)
+        params.require(:cla_attendance).permit(:cla_live_class_id, :cla_user_id, :cla_cohort_id, :present, :cla_course_id)
       end
     end
   end
