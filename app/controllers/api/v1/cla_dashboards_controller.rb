@@ -88,6 +88,7 @@ module Api
             courses: course_ids.map do |course_id|
               {
                 course_id: course_id,
+                course_name: ClaCourse.find(course_id).name,
                 course_completion_rate: ClaDashboardCourseStatsHelper.course_completion_rate(cohort_id, user_id),
                 user_score_percentage: ClaDashboardScoreStatsHelper.user_score_percentage(user_id),
                 user_submission_percentage: ClaDashboardAssignmentStatsHelper.user_submission_percentage(user_id, course_id),
