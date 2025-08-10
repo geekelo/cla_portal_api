@@ -143,6 +143,11 @@ module Api
         user_id = params[:cla_user_id]
         return render json: { error: 'User ID is required' }, status: :unprocessable_entity unless user_id
 
+        user = ClaUser.find_by(user_id: user_id)
+        return render json: { error: 'User not found' }, status: :not_found unless user
+        return render json: { error: 'User is not assigned to any cohort' }, status: :unprocessable_entity unless user.cla_cohort_id
+
+        cohort_id = user.cla_cohort_id
         course_ids = ClaCourse.where(cla_cohort_id: cohort_id).pluck(:id)
 
         stats = course_ids.map do |course_id|
