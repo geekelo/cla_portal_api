@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         get :desk_stats
         get :student_list
         get :student_details
+        get :student_dashboard_stats
       end
       resources :cla_users
       resources :cla_roles
