@@ -153,17 +153,18 @@ module Api
         stats = {
           courses_completed: course_ids.count,
           course_stats: course_ids.map do |course_id|
-          {
-            course_id: course_id,
-            course_name: ClaCourse.find(course_id).name,
-            course_stats: {
-              user_score_percentage: ClaDashboardScoreStatsHelper.user_score_percentage(user_id, course_id),
-              user_submission_percentage: ClaDashboardAssignmentStatsHelper.user_submission_percentage(user_id, course_id),
-              user_attendance_percentage: ClaDashboardAttendanceStatsHelper.user_attendance_percentage(user_id, course_id),
-              user_cbt_stats: ClaDashboardCbtStatsHelper.user_cbt_stats(user_id, course_id),
-              user_contribution_stats: ClaDashboardContributionsStatsHelper.user_contributions_stats(user_id, course_id)
+            {
+              course_id: course_id,
+              course_name: ClaCourse.find(course_id).name,
+              course_stats: {
+                user_score_percentage: ClaDashboardScoreStatsHelper.user_score_percentage(user_id, course_id),
+                user_submission_percentage: ClaDashboardAssignmentStatsHelper.user_submission_percentage(user_id, course_id),
+                user_attendance_percentage: ClaDashboardAttendanceStatsHelper.user_attendance_percentage(user_id, course_id),
+                user_cbt_stats: ClaDashboardCbtStatsHelper.user_cbt_stats(user_id, course_id),
+                user_contribution_stats: ClaDashboardContributionsStatsHelper.user_contributions_stats(user_id, course_id)
+              }
             }
-          }
+          end
         }
         render json: stats, status: :ok
       end
