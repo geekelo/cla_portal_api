@@ -1,12 +1,12 @@
 class Api::V1::ClaContributionsController < ApplicationController
   def index
-    contributions = if params[:cla_user_id].present?
+    contributions = if params[:cla_course_id].present?
+                      ClaContribution.where(cla_course_id: params[:cla_course_id])
+                    elsif params[:cla_user_id].present?
                       ClaContribution.where(cla_user_id: params[:cla_user_id])
-                    elsif params[:cla_cohort_id].present?
-                      ClaContribution.where(cla_cohort_id: params[:cla_cohort_id])
                     else
                       ClaContribution.all
-                    end.order(created_at: :asc)
+                    end.order(created_at: :desc)
 
     render json: contributions, each_serializer: ClaContributionSerializer, status: :ok
   end
