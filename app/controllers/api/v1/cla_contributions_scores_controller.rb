@@ -22,6 +22,17 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
     end
   end
 
+  def students_without_scores
+    # get all students in the cohort
+    cohort = @contribution.cla_cohort
+    students = cohort.cla_users
+    # get all students with scores
+    student_ids_with_scores = ClaContributionsScore.where(cla_contribution_id: @contribution.id).pluck(:cla_user_id)
+    # get all students without scores
+    students_without_scores = students.where.not(id: student_ids_with_scores)
+    render json: students_without_scores, each_serializer: ClaUserSerializer, status: :ok
+  end
+
   private
 
   def contributions_score_params
