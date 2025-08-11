@@ -1,5 +1,5 @@
 class ClaContributionsSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :due_date, :url, :cla_cohort_id, :cla_course_id, :student_score
+  attributes :id, :name, :description, :due_date, :cla_cohort_id, :cla_course_id, :student_score
 
   def student_score
     if current_user.cla_role.name == 'student'
