@@ -42,7 +42,11 @@ Rails.application.routes.draw do
       end
       resources :cla_topics
       resources :cla_assignments
-      resources :cla_submissions
+      resources :cla_submissions do
+        collection do
+          get :students_without_scores
+        end
+      end
       resources :cla_live_classes do
         collection do
           get :today_classes

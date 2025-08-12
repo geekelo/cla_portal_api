@@ -1,14 +1,14 @@
 module Api
   module V1
     class ClaAssignmentsController < ApplicationController
+      before_action :authenticate_user!
+
       def index
         assignments = if params[:cla_course_id].present?
                         ClaAssignment.where(cla_course_id: params[:cla_course_id])
-                      elsif params[:cla_user_id].present?
-                        ClaAssignment.where(cla_user_id: params[:cla_user_id])
-                      else
-                        ClaAssignment.all
-                      end
+                      else 
+                        ClaAssignment.where(cla_cohort_id: params[:cla_cohort_id])
+                      end.order(created_at: :desc)
 
         render json: assignments, each_serializer: ClaAssignmentSerializer, status: :ok
       end

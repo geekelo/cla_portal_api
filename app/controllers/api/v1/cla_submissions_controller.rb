@@ -1,6 +1,9 @@
 module Api
   module V1
     class ClaSubmissionsController < ApplicationController
+      before_action :authenticate_user!
+      before_action :set_assignment, only: [:index, :create, :update, :destroy]
+
       def index
         submissions = if params[:cla_user_id].present?
                         ClaSubmission.where('cla_student_id = ? OR cla_facilitator_id = ?', params[:cla_user_id],
@@ -37,10 +40,36 @@ module Api
         render json: { message: 'Submission deleted successfully' }, status: :ok
       end
 
+      def students_without_scores
+        # get all students in the cohort
+        cohort = @assignment.cla_course.cla_cohort
+        return render json: { error: 'Assignment not found or has no associated cohort' }, status: :not_found unless cohort
+        
+        students = cohort.cla_users
+        # get all students with scores
+        student_ids_with_scores = ClaSubmission.where(cla_assignment_id: @assignment.id).pluck(:cla_student_id)
+        # get all students without scores
+        students_without_scores = students.where.not(user_id: student_ids_with_scores)
+        
+        # Add debugging information
+        render json: {
+          total_students_in_cohort: students.count,
+          students_with_scores: student_ids_with_scores.count,
+          students_without_scores: students_without_scores.count,
+          cohort_id: cohort.id,
+          assignment_id: @assignment.id,
+          students_without_scores_list: ActiveModel::Serializer::CollectionSerializer.new(students_without_scores, each_serializer: ClaUserSerializer).as_json
+        }, status: :ok
+      end
+
       private
 
       def submission_params
-        params.require(:cla_submission).permit(:download_link, :cla_assignment_id, :cla_student_id, :cla_facilitator_id)
+        params.require(:cla_submission).permit(:score, :cla_assignment_id, :cla_student_id, :cla_course_id, :cla_cohort_id)
+      end
+
+      def set_assignment
+        @assignment = ClaAssignment.find(params[:cla_assignment_id])
       end
     end
   end
