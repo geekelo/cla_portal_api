@@ -1,5 +1,5 @@
 class ClaContribution < ApplicationRecord
   belongs_to :cla_cohort
   belongs_to :cla_course
-  has_many :cla_contributions_scores
+  has_many :cla_contributions_scores, dependent: :destroy
 end
