@@ -8,4 +8,5 @@ class ClaCohort < ApplicationRecord
 
   has_many :cla_attendances
   has_many :cla_submissions
+  has_many :cla_assignments
 end
