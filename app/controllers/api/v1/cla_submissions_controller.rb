@@ -2,7 +2,7 @@ module Api
   module V1
     class ClaSubmissionsController < ApplicationController
       before_action :authenticate_user!
-      before_action :set_assignment, only: [:index, :create, :update, :destroy, :students_without_scores]
+      before_action :set_assignment, only: [:create, :students_without_scores]
 
       def index
         submissions = if params[:cla_user_id].present?
@@ -16,7 +16,7 @@ module Api
       end
 
       def create
-        submission = ClaSubmission.new(submission_params)
+        submission = @assignment.cla_submissions.new(submission_params)
         if submission.save
           render json: submission, status: :created
         else
