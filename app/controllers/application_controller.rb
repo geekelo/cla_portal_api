@@ -5,6 +5,8 @@ class ApplicationController < ActionController::API
 
   def authenticate_user!
     payload = JsonWebToken.decode(auth_token)
+    return render json: { error: "Invalid auth token" }, status: :unauthorized unless payload
+    
     @current_user = ClaUser.find(payload["sub"])
   rescue JWT::DecodeError
     render json: { error: "Invalid auth token" }, status: :unauthorized
