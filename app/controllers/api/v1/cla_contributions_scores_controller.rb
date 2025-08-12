@@ -8,7 +8,7 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
   def create
     contributions_score = @contribution.cla_contributions_scores.new(contributions_score_params)
     if contributions_score.save
-      render json: contributions_score, each_serializer: ClaContributionsScoreSerializer, status: :created
+      render json: { message: 'Contribution score created successfully' }, status: :created
     else
       render json: { errors: contributions_score.errors.full_messages }, status: :unprocessable_entity
     end
@@ -17,7 +17,7 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
   def update
     contributions_score = ClaContributionsScore.find(params[:id])
     if contributions_score.update(contributions_score_params)
-      render json: contributions_score, each_serializer: ClaContributionsScoreSerializer, status: :ok
+      render json: { message: 'Contribution score updated successfully' }, status: :ok
     else
       render json: { errors: contributions_score.errors.full_messages }, status: :unprocessable_entity
     end
