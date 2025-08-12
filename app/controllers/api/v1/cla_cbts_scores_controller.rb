@@ -1,5 +1,5 @@
 class Api::V1::ClaCbtsScoresController < ApplicationController
-  before_action :set_cbt, only: [:create]
+  before_action :set_cbt, only: [:create, :students_without_scores]
 
   def index
     cbts_scores = if params[:cla_user_id].present?
@@ -61,6 +61,6 @@ class Api::V1::ClaCbtsScoresController < ApplicationController
   end
 
   def set_cbt
-    @cbt = ClaCbt.find(params[:cla_cbts_id])
+    @cbt = ClaCbt.find(params[:cla_cbt_id])
   end
 end
