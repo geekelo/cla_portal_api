@@ -41,7 +41,7 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
       students_without_scores: students_without_scores.count,
       cohort_id: cohort.id,
       contribution_id: @contribution.id,
-      students_without_scores_list: ClaUserSerializer.new(students_without_scores).as_json
+      students_without_scores_list: ActiveModel::Serializer::CollectionSerializer.new(students_without_scores, each_serializer: ClaUserSerializer).as_json
     }, status: :ok
   end
 
