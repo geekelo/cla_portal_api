@@ -1,11 +1,5 @@
 class CreateClaCbtsScores < ActiveRecord::Migration[7.1]
   def up
-    # Remove the existing index first
-    remove_index :cla_cbts_scores, name: 'index_cla_cbts_scores_on_cbt_user_cohort'
-    
-    # Drop and recreate the table with the correct types
-    drop_table :cla_cbts_scores
-    
     create_table :cla_cbts_scores do |t|
       t.references :cla_cbt, type: :uuid, null: true, foreign_key: false
       t.references :cla_user, type: :string, null: true, foreign_key: false

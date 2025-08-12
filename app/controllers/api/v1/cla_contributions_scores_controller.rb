@@ -1,5 +1,6 @@
 class Api::V1::ClaContributionsScoresController < ApplicationController
   before_action :set_contribution, only: [:create, :students_without_scores]
+  
   def index
     contributions_scores = ClaContributionsScore.all
     render json: contributions_scores, each_serializer: ClaContributionsScoreSerializer, status: :ok
