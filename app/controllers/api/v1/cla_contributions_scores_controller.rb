@@ -33,7 +33,16 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
     student_ids_with_scores = ClaContributionsScore.where(cla_contribution_id: @contribution.id).pluck(:cla_user_id)
     # get all students without scores
     students_without_scores = students.where.not(id: student_ids_with_scores)
-    render json: students_without_scores, each_serializer: ClaUserSerializer, status: :ok
+    
+    # Add debugging information
+    render json: {
+      total_students_in_cohort: students.count,
+      students_with_scores: student_ids_with_scores.count,
+      students_without_scores: students_without_scores.count,
+      cohort_id: cohort.id,
+      contribution_id: @contribution.id,
+      students_without_scores_list: students_without_scores.map { |s| { id: s.id, user_id: s.user_id, name: s.name } }
+    }, status: :ok
   end
 
   private
