@@ -32,6 +32,28 @@ class Api::V1::ClaCbtsScoresController < ApplicationController
     end
   end
 
+  def students_without_scores
+    # get all students in the cohort
+    cohort = @cbt.cla_course.cla_cohort
+    return render json: { error: 'CBT not found or has no associated cohort' }, status: :not_found unless cohort
+    
+    students = cohort.cla_users
+    # get all students with scores
+    student_ids_with_scores = ClaCbtsScore.where(cla_cbt_id: @cbt.id).pluck(:cla_user_id)
+    # get all students without scores
+    students_without_scores = students.where.not(user_id: student_ids_with_scores)
+    
+    # Add debugging information
+    render json: {
+      total_students_in_cohort: students.count,
+      students_with_scores: student_ids_with_scores.count,
+      students_without_scores: students_without_scores.count,
+      cohort_id: cohort.id,
+      cbt_id: @cbt.id,
+      students_without_scores_list: ActiveModel::Serializer::CollectionSerializer.new(students_without_scores, each_serializer: ClaUserSerializer).as_json
+    }, status: :ok
+  end
+
   private
 
   def cbt_score_params

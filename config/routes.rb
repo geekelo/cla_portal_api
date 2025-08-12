@@ -54,7 +54,11 @@ Rails.application.routes.draw do
         end
       end
       resources :cla_cbts
-      resources :cla_cbts_scores
+      resources :cla_cbts_scores do
+        collection do
+          get :students_without_scores
+        end
+      end
       resources :cla_contributions
       resources :cla_contributions_scores do
         collection do

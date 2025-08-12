@@ -1,4 +1,4 @@
-class FixClaCbtsScores < ActiveRecord::Migration[7.1]
+class CreateClaCbtsScores < ActiveRecord::Migration[7.1]
   def up
     # Remove the existing index first
     remove_index :cla_cbts_scores, name: 'index_cla_cbts_scores_on_cbt_user_cohort'
