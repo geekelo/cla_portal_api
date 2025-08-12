@@ -4,11 +4,15 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_user!
+    Rails.logger.info "Auth token: #{auth_token}"
+    Rails.logger.info "JWT_SECRET_KEY present: #{ENV['JWT_SECRET_KEY'].present?}"
+    
     payload = JsonWebToken.decode(auth_token)
     return render json: { error: "Invalid auth token" }, status: :unauthorized unless payload
     
     @current_user = ClaUser.find(payload["sub"])
-  rescue JWT::DecodeError
+  rescue JWT::DecodeError => e
+    Rails.logger.error "JWT Decode Error: #{e.message}"
     render json: { error: "Invalid auth token" }, status: :unauthorized
   end
 
