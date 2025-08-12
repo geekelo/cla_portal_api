@@ -1,4 +1,6 @@
 class Api::V1::ClaCbtsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     cbts = if params[:cla_course_id].present?
              ClaCbt.where(cla_course_id: params[:cla_course_id])
