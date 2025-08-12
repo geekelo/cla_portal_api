@@ -1,4 +1,5 @@
 class Api::V1::ClaContributionsScoresController < ApplicationController
+  before_action :set_contribution, only: [:create, :students_without_scores]
   def index
     contributions_scores = ClaContributionsScore.all
     render json: contributions_scores, each_serializer: ClaContributionsScoreSerializer, status: :ok
@@ -24,7 +25,9 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
 
   def students_without_scores
     # get all students in the cohort
-    cohort = @contribution.cla_cohort
+    cohort = @contribution.cla_course.cla_cohort
+    return render json: { error: 'Contribution not found or has no associated cohort' }, status: :not_found unless cohort
+    
     students = cohort.cla_users
     # get all students with scores
     student_ids_with_scores = ClaContributionsScore.where(cla_contribution_id: @contribution.id).pluck(:cla_user_id)
