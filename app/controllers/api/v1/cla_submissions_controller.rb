@@ -41,8 +41,8 @@ module Api
       end
 
       def students_without_scores
-        # get all students in the cohort
-        cohort = @assignment.cla_cohort
+        # get all students in the cohort through the course
+        cohort = @assignment.cla_course.cla_cohort
         return render json: { error: 'Assignment not found or has no associated cohort' }, status: :not_found unless cohort
         
         students = cohort.cla_users
