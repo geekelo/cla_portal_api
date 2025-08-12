@@ -1,12 +1,10 @@
 class Api::V1::ClaCbtsController < ApplicationController
   def index
-    cbts = if params[:cla_user_id].present?
-             ClaCbt.where(cla_user_id: params[:cla_user_id])
-           elsif params[:cla_cohort_id].present?
-             ClaCbt.where(cla_cohort_id: params[:cla_cohort_id])
+    cbts = if params[:cla_course_id].present?
+             ClaCbt.where(cla_course_id: params[:cla_course_id])
            else
-             ClaCbt.all
-           end.order(created_at: :asc)
+             ClaCbt.where(cla_cohort_id: params[:cla_cohort_id])
+           end.order(created_at: :desc)
 
     render json: cbts, each_serializer: ClaCbtSerializer, status: :ok
   end
