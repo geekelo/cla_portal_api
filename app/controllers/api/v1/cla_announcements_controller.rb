@@ -3,7 +3,7 @@ class Api::V1::ClaAnnouncementsController < ApplicationController
 
   def index
     announcements = if current_user.cla_role.name == 'facilitator'
-                      ClaAnnouncement.where(cla_cohort_id: current_user.cla_cohort_id)
+                      ClaAnnouncement.where(cla_cohort_id: params[:cla_cohort_id])
                     else
                       cohortNotices = ClaAnnouncement.where(cla_cohort_id: params[:cla_cohort_id])
                       userNotices = ClaAnnouncement.where(cla_user_id: current_user.id)
