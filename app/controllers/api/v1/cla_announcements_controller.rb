@@ -2,7 +2,7 @@ class Api::V1::ClaAnnouncementsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    announcements = if current_user.role.name == 'facilitator'
+    announcements = if current_user.cla_role.name == 'facilitator'
                       ClaAnnouncement.where(cla_cohort_id: current_user.cla_cohort_id)
                     else
                       cohortNotices = ClaAnnouncement.where(cla_cohort_id: params[:cla_cohort_id])
