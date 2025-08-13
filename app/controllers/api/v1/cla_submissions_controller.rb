@@ -65,7 +65,7 @@ module Api
       private
 
       def submission_params
-        params.require(:cla_submission).permit(:score, :cla_assignment_id, :cla_student_id, :cla_course_id, :cla_cohort_id)
+        params.require(:cla_submission).permit(:score, :cla_assignment_id, :cla_student_id, :cla_facilitator_id, :cla_course_id, :cla_cohort_id, :download_link)
       end
 
       def set_assignment
