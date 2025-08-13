@@ -3,12 +3,12 @@ class Api::V1::ClaAnnouncementsController < ApplicationController
 
   def index
     announcements = if current_user.cla_role.name == 'facilitator'
-                      ClaAnnouncement.where(cla_cohort_id: params[:cla_cohort_id])
+                      ClaAnnouncement.where(cla_cohort_id: params[:cla_cohort_id]).sort_by(&:created_at).reverse
                     else
                       cohortNotices = ClaAnnouncement.where(cla_cohort_id: params[:cla_cohort_id])
                       userNotices = ClaAnnouncement.where(cla_user_id: current_user.id)
-                      cohortNotices + userNotices
-                    end.order(created_at: :desc)
+                      (cohortNotices + userNotices).sort_by(&:created_at).reverse
+                    end
     render json: announcements, each_serializer: ClaAnnouncementSerializer
   end
 
