@@ -18,7 +18,7 @@ module Api
         if assignment.save
           render json: { message: 'Assignment created successfully' }, status: :created
         else
-          render json: { error: 'Something went wrong creating assignment' }, status: :unprocessable_entity
+          render json: { errors: assignment.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
@@ -40,7 +40,7 @@ module Api
       private
 
       def assignment_params
-        params.require(:cla_assignment).permit(:name, :description, :due_date, :cla_course_id, :cla_user_id)
+        params.require(:cla_assignment).permit(:name, :description, :due_date, :cla_course_id, :cla_user_id, :cla_cohort_id)
       end
     end
   end
