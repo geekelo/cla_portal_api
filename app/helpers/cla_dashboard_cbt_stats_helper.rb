@@ -7,7 +7,7 @@ module ClaDashboardCbtStatsHelper
     cohort_id = user.cla_cohort_id
 
     # Get total cbts scores of user
-    total_cbts_scores = ClaCbtsScores.where(cla_user_id: user_id, cla_course_id: course_id).sum(:score)
+    total_cbts_scores = ClaCbtsScore.where(cla_user_id: user_id, cla_course_id: course_id).sum(:score)
 
     # Get cbt points
     cbt_points = ((total_cbts_scores * 20)/100).round(2)
