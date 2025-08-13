@@ -69,6 +69,7 @@ Rails.application.routes.draw do
           get :students_without_scores
         end
       end
+      resources :cla_announcements
     end
   end
 

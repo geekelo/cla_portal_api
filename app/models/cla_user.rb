@@ -14,7 +14,8 @@ class ClaUser < ApplicationRecord
   has_many :cla_courses
   has_many :cla_cbts_scores
   has_many :cla_contributions_scores
-
+  has_many :cla_announcements
+  
   before_create :generate_user_id
   before_create :generate_reset_password_token
 
