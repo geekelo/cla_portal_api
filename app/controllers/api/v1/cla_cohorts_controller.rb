@@ -35,6 +35,12 @@ module Api
         render json: { message: 'Cohort deleted successfully' }, status: :ok
       end
 
+      def students_of_cohort
+        cohort = ClaCohort.find(params[:cla_cohort_id])
+        students = cohort.cla_users
+        render json: { students: students.map { |student| { user_id: student.user_id, name: student.name } } }, status: :ok
+      end
+
       private
 
       def cohort_params

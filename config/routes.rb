@@ -34,7 +34,11 @@ Rails.application.routes.draw do
       end
       resources :cla_users
       resources :cla_roles
-      resources :cla_cohorts
+      resources :cla_cohorts do
+        collection do
+          get :students_of_cohort
+        end
+      end
       resources :cla_courses do
         collection do
           get :get_course_ids
