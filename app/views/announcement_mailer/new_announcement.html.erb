@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background-color: #007bff; color: white; padding: 20px; text-align: center; }
+    .content { padding: 20px; background-color: #f8f9fa; }
+    .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+    .announcement-title { font-size: 24px; font-weight: bold; margin-bottom: 15px; }
+    .announcement-content { margin-bottom: 20px; }
+    .meta { color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>New Announcement</h1>
+    </div>
+    
+    <div class="content">
+      <div class="announcement-title">
+        <%= @announcement.title %>
+      </div>
+      
+      <div class="announcement-content">
+        A new announcement has been posted on the platform.
+        Kindly check the platform for more details.
+        <%= link_to 'cla.jjrsf.org', 'https://cla.jjrsf.org' %>
+      </div>
+      
+      <div class="meta">
+        <p><strong>Posted:</strong> <%= @announcement.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+        <% if @announcement.cla_cohort %>
+          <p><strong>Cohort:</strong> <%= @announcement.cla_cohort.name %></p>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>This is an automated notification from JJRSF Christian Leadership Academy.</p>
+      <p>Please do not reply to this email.</p>
+    </div>
+  </div>
+</body>
+</html> 

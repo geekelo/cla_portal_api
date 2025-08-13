@@ -15,6 +15,9 @@ class Api::V1::ClaAnnouncementsController < ApplicationController
   def create
     announcement = ClaAnnouncement.new(announcement_params)
     if announcement.save
+      # Send email notifications to students
+      send_announcement_emails(announcement)
+      
       render json: announcement, status: :created
     else
       render json: announcement.errors, status: :unprocessable_entity
@@ -43,5 +46,19 @@ class Api::V1::ClaAnnouncementsController < ApplicationController
 
   def announcement_params
     params.require(:cla_announcement).permit(:title, :content, :cla_cohort_id, :cla_user_id)
+  end
+
+  def send_announcement_emails(announcement)
+    if announcement.cla_cohort_id
+      if announcement.cla_user_id
+        # Send to specific user
+        student = ClaUser.find_by(user_id: announcement.cla_user_id)
+        AnnouncementMailer.new_announcement(announcement, [student]).deliver_now if student
+      else
+        # Send to all students in the cohort
+        students = ClaUser.where(cla_cohort_id: announcement.cla_cohort_id)
+        AnnouncementMailer.new_announcement(announcement, students).deliver_now if students.any?
+      end
+    end
   end
 end
