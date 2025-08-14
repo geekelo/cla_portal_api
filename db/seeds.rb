@@ -21,20 +21,20 @@ cla_roles = %w[student facilitator alumni admin]
 
 # db/seeds.rb
 
-# Define an array of cohort data
-cohorts_data = [
-  { name: 'Spring 2025', start_date: '2025-03-01', end_date: '2025-06-30' },
-  { name: 'Summer 2025', start_date: '2025-07-01', end_date: '2025-09-30' },
-  { name: 'Fall 2025',   start_date: '2025-09-01', end_date: '2025-12-31' }
-]
+# Define an array of cohort data. IT KEEPS CREATING COHORT. THEY ARE ONLY NECESSARY ON FRESH DEPLOY
+# cohorts_data = [
+#   { name: 'Spring 2025', start_date: '2025-03-01', end_date: '2025-06-30' },
+#   { name: 'Summer 2025', start_date: '2025-07-01', end_date: '2025-09-30' },
+#   { name: 'Fall 2025',   start_date: '2025-09-01', end_date: '2025-12-31' }
+# ]
 
-# Create or find cohorts based on the name attribute.
-cohorts_data.each do |data|
-  ClaCohort.find_or_create_by!(name: data[:name]) do |cohort|
-    cohort.start_date = data[:start_date]
-    cohort.end_date   = data[:end_date]
-  end
-end
+# # Create or find cohorts based on the name attribute.
+# cohorts_data.each do |data|
+#   ClaCohort.find_or_create_by!(name: data[:name]) do |cohort|
+#     cohort.start_date = data[:start_date]
+#     cohort.end_date   = data[:end_date]
+#   end
+# end
 
 puts '✅ Cohorts seeded successfully!'
 
