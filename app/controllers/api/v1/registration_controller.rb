@@ -1,6 +1,7 @@
 module Api
   module V1
     class RegistrationController < ApplicationController
+      before_action :authenticate_user!, only: [:update]
       before_action :set_user, only: [:update]
 
       def create
@@ -22,7 +23,9 @@ module Api
           return
         end
 
-        if @user.update(update_params)
+        new_user_params = update_params.merge(cla_cohort_id: @user.cla_cohort_id)
+
+        if @user.update(new_user_params)
           render json: { message: 'User updated successfully' }, status: :ok
         else
           render json: { error: 'Something went wrong updating CLA user' }, status: :unprocessable_entity
@@ -32,7 +35,7 @@ module Api
       private
 
       def set_user
-        @user = ClaUser.find_by(user_id: params[:id])
+        @user = current_user
       rescue ActiveRecord::RecordNotFound
         render json: { error: 'User not found' }, status: :not_found
       end
