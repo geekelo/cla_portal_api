@@ -8,8 +8,18 @@ class AnnouncementMailer < ApplicationMailer
       mail(
         to: student.email,
         subject: "New Announcement: #{@announcement.title}",
-        from: 'jjrsfcla@gmail.com'
+        from: 'JJRSF CLA Moodle'
       )
     end
   end
-end 
+
+  def score_email(user, score_type)
+    @user = user
+    @score_type = score_type
+    mail(
+      to: @user.email,
+      subject: "Your #{@score_type} has been updated",
+      from: 'JJRSF CLA Moodle'
+    )
+  end
+end

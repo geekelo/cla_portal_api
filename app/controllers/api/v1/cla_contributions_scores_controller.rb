@@ -9,6 +9,8 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
   def create
     contributions_score = @contribution.cla_contributions_scores.new(contributions_score_params)
     if contributions_score.save
+      # send email to student
+      AnnouncementMailer.score_email(contributions_score.cla_user, 'Contribution Score').deliver_now
       render json: { message: 'Contribution score created successfully' }, status: :created
     else
       render json: { errors: contributions_score.errors.full_messages }, status: :unprocessable_entity

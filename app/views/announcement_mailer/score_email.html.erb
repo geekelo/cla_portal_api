@@ -16,31 +16,30 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>New Announcement</h1>
+      <h1>New Score</h1>
     </div>
     
     <div class="content">
       <div class="announcement-title">
-        <%= @announcement.title %>
+        <%= @score_type %>
       </div>
       
       <div class="announcement-content">
-        A new announcement has been posted on the platform.
+        A new <%= @score_type %> has been posted on the platform.
         Kindly check the platform for more details.
         <%= link_to 'cla.jjrsf.org', 'https://cla.jjrsf.org' %>
       </div>
       
       <div class="meta">
-        <p><strong>Posted:</strong> <%= @announcement.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
-        <% if @announcement.cla_cohort %>
-          <p><strong>Cohort:</strong> <%= @announcement.cla_cohort.name %></p>
+        <p><strong>Posted:</strong> <%= @score.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+        <% if @score.cla_cohort %>
+          <p><strong>Cohort:</strong> <%= @score.cla_cohort.name %></p>
         <% end %>
       </div>
     </div>
     
     <div class="footer">
       <p>This is a notification from JJRSF Christian Leadership Academy.</p>
-
     </div>
   </div>
 </body>

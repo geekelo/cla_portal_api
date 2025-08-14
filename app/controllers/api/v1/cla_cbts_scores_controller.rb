@@ -17,6 +17,8 @@ class Api::V1::ClaCbtsScoresController < ApplicationController
   def create
     cbt_score = @cbt.cla_cbts_scores.new(cbt_score_params)
     if cbt_score.save
+      # send email to student
+      AnnouncementMailer.score_email(cbt_score.cla_user, 'CBT Score').deliver_now
       render json: cbt_score, each_serializer: ClaCbtsScoreSerializer, status: :created
     else
       render json: { errors: cbt_score.errors.full_messages }, status: :unprocessable_entity

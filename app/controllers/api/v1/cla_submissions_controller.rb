@@ -18,6 +18,8 @@ module Api
       def create
         submission = @assignment.cla_submissions.new(submission_params)
         if submission.save
+          # send email to student
+          AnnouncementMailer.score_email(submission.cla_student, 'Submission Score').deliver_now
           render json: submission, status: :created
         else
           Rails.logger.info "Validation Errors: #{submission.errors.full_messages}"
