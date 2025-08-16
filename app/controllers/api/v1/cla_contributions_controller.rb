@@ -17,6 +17,7 @@ class Api::V1::ClaContributionsController < ApplicationController
   end
 
   def create
+    # if the cohort is not provided, use the cohort of the course
     if contribution_params[:cla_cohort_id].blank? || contribution_params[:cla_cohort_id].nil?
       course = ClaCourse.find(contribution_params[:cla_course_id])
       cohort = course.cla_cohort
