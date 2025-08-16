@@ -1,4 +1,6 @@
 class Api::V1::ClaContributionsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     contributions = if params[:cla_course_id].present?
                       ClaContribution.where(cla_course_id: params[:cla_course_id])
@@ -15,6 +17,11 @@ class Api::V1::ClaContributionsController < ApplicationController
   end
 
   def create
+    if contribution_params[:cla_cohort_id].blank? || contribution_params[:cla_cohort_id].nil?
+      course = ClaCourse.find(contribution_params[:cla_course_id])
+      cohort = course.cla_cohort
+      contribution_params[:cla_cohort_id] = cohort.id
+    end
     contribution = ClaContribution.new(contribution_params)
     if contribution.save
       render json: contribution, each_serializer: ClaContributionsSerializer, status: :created
