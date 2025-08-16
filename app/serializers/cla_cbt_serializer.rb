@@ -1,5 +1,5 @@
 class ClaCbtSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :due_date, :url, :cla_cohort_id, :cla_course_id, :student_score
+  attributes :id, :name, :description, :due_date, :url, :cla_cohort_id, :cla_course_id, :student_score, :course_name
 
   def student_score
     return nil unless current_user
@@ -9,5 +9,9 @@ class ClaCbtSerializer < ActiveModel::Serializer
     else
       nil
     end
+  end
+
+  def course_name
+    object&.cla_course.name
   end
 end
