@@ -15,12 +15,13 @@ module Api
 
       def create
         # if cla_cohort_id is not present, get it from the cla_course_id
-        assignment = ClaAssignment.new(assignment_params)
         if assignment_params[:cla_cohort_id].blank? || assignment_params[:cla_cohort_id].nil?
           course = ClaCourse.find(assignment_params[:cla_course_id])
           cohort = course.cla_cohort
           assignment_params[:cla_cohort_id] = cohort.id
         end
+
+        assignment = ClaAssignment.new(assignment_params)
         if assignment.save
           render json: { message: 'Assignment created successfully' }, status: :created
         else
