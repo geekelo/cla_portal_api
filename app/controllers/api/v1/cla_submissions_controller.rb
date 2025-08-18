@@ -18,6 +18,7 @@ module Api
       def create
         submission = @assignment.cla_submissions.new(submission_params)
         if submission.save
+          submission.update(status: 'marked')
           # send email to student
           AnnouncementMailer.score_email(submission.cla_student, 'Submission Score').deliver_now
           render json: submission, status: :created
