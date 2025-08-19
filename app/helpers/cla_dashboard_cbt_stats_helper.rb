@@ -11,7 +11,7 @@ module ClaDashboardCbtStatsHelper
     # Get total cbts scores of user
     total_cbts_scores = ClaCbtsScore.where(cla_user_id: user_id, cla_course_id: course_id).sum(:score)
 
-    cbt_percentage = total_cbts_scores.to_f / (total_cbts.to_f * 100) * 100
+    cbt_percentage = total_cbts.zero? ? 0 : (total_cbts_scores.to_f / (total_cbts.to_f * 100) * 100)
 
     # Get cbt points
     cbt_points = ((cbt_percentage * 20)/100).round(2)
