@@ -7,11 +7,22 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
   end
 
   def create
-    contributions_score = @contribution.cla_contributions_scores.new(contributions_score_params)
+    # Find existing score or initialize a new one
+    contributions_score = ClaContributionsScore.find_or_initialize_by(
+      cla_contribution_id: contributions_score_params[:cla_contribution_id],
+      cla_user_id: contributions_score_params[:cla_user_id],
+      cla_cohort_id: contributions_score_params[:cla_cohort_id]
+    )
+    
+    # Update the score
+    contributions_score.score = contributions_score_params[:score]
+    
     if contributions_score.save
       # send email to student
-      AnnouncementMailer.score_email(contributions_score.cla_user, 'Contribution Score').deliver_now
-      render json: { message: 'Contribution score created successfully' }, status: :created
+      AnnouncementMailer.score_email(contributions_score.cla_user, 'Contribution Score', contributions_score.score).deliver_now
+      status = contributions_score.previously_new_record? ? :created : :ok
+      message = contributions_score.previously_new_record? ? 'Contribution score created successfully' : 'Contribution score updated successfully'
+      render json: { message: message }, status: status
     else
       render json: { errors: contributions_score.errors.full_messages }, status: :unprocessable_entity
     end

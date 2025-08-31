@@ -15,11 +15,21 @@ class Api::V1::ClaCbtsScoresController < ApplicationController
   end
 
   def create
-    cbt_score = @cbt.cla_cbts_scores.new(cbt_score_params)
+    # Find existing score or initialize a new one
+    cbt_score = ClaCbtsScore.find_or_initialize_by(
+      cla_cbt_id: cbt_score_params[:cla_cbt_id],
+      cla_user_id: cbt_score_params[:cla_user_id],
+      cla_cohort_id: cbt_score_params[:cla_cohort_id]
+    )
+    
+    # Update the score
+    cbt_score.score = cbt_score_params[:score]
+    
     if cbt_score.save
       # send email to student
-      AnnouncementMailer.score_email(cbt_score.cla_user, 'CBT Score').deliver_now
-      render json: cbt_score, each_serializer: ClaCbtsScoreSerializer, status: :created
+      AnnouncementMailer.score_email(cbt_score.cla_user, 'CBT Score', cbt_score.score).deliver_now
+      status = cbt_score.previously_new_record? ? :created : :ok
+      render json: cbt_score, each_serializer: ClaCbtsScoreSerializer, status: status
     else
       render json: { errors: cbt_score.errors.full_messages }, status: :unprocessable_entity
     end
