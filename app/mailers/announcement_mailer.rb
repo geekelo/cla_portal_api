@@ -13,9 +13,10 @@ class AnnouncementMailer < ApplicationMailer
     end
   end
 
-  def score_email(user, score_type)
+  def score_email(user, score_type, score = nil)
     @user = user
     @score_type = score_type
+    @score = score
     mail(
       to: @user.email,
       subject: "Your #{@score_type} has been updated",
