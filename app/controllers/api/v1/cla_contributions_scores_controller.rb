@@ -19,7 +19,7 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
     
     if contributions_score.save
       # send email to student
-      AnnouncementMailer.score_email(contributions_score.cla_user, 'Contribution Score', contributions_score.score).deliver_now
+      AnnouncementMailer.score_email(contributions_score.cla_user, 'Contribution Score', contributions_score).deliver_now
       status = contributions_score.previously_new_record? ? :created : :ok
       message = contributions_score.previously_new_record? ? 'Contribution score created successfully' : 'Contribution score updated successfully'
       render json: { message: message }, status: status

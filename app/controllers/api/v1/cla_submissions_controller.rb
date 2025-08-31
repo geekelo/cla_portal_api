@@ -20,7 +20,7 @@ module Api
         if submission.save
           submission.update(status: 'marked')
           # send email to student
-          AnnouncementMailer.score_email(submission.cla_student, 'Submission Score').deliver_now
+          AnnouncementMailer.score_email(submission.cla_student, 'Submission Score', submission).deliver_now
           render json: submission, status: :created
         else
           Rails.logger.info "Validation Errors: #{submission.errors.full_messages}"

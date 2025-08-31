@@ -27,7 +27,7 @@ class Api::V1::ClaCbtsScoresController < ApplicationController
     
     if cbt_score.save
       # send email to student
-      AnnouncementMailer.score_email(cbt_score.cla_user, 'CBT Score', cbt_score.score).deliver_now
+      AnnouncementMailer.score_email(cbt_score.cla_user, 'CBT Score', cbt_score).deliver_now
       status = cbt_score.previously_new_record? ? :created : :ok
       render json: cbt_score, each_serializer: ClaCbtsScoreSerializer, status: status
     else

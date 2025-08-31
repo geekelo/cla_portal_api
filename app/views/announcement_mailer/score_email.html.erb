@@ -31,9 +31,13 @@
       </div>
       
       <div class="meta">
-        <p><strong>Posted:</strong> <%= @score.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
-        <% if @score.cla_cohort %>
-          <p><strong>Cohort:</strong> <%= @score.cla_cohort.name %></p>
+        <% if @score %>
+          <p><strong>Posted:</strong> <%= @score.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+          <% if @score.cla_cohort %>
+            <p><strong>Cohort:</strong> <%= @score.cla_cohort.name %></p>
+          <% end %>
+        <% else %>
+          <p><strong>Posted:</strong> <%= Time.current.strftime("%B %d, %Y at %I:%M %p") %></p>
         <% end %>
       </div>
     </div>
