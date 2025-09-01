@@ -69,7 +69,7 @@ class Api::V1::ClaCbtsScoresController < ApplicationController
   private
 
   def cbt_score_params
-    params.require(:cla_cbts_score).permit(:cla_user_id, :cla_cbt_id, :cla_cohort_id, :score)
+    params.require(:cla_cbts_score).permit(:cla_user_id, :cla_cbt_id, :cla_cohort_id, :score, :cla_course_id)
   end
 
   def set_cbt

@@ -62,7 +62,7 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
   private
 
   def contributions_score_params
-    params.require(:cla_contributions_score).permit(:cla_contribution_id, :cla_user_id, :cla_cohort_id, :score)
+    params.require(:cla_contributions_score).permit(:cla_contribution_id, :cla_user_id, :cla_cohort_id, :score, :cla_course_id)
   end
 
   def set_contribution
