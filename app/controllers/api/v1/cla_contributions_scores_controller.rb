@@ -11,7 +11,8 @@ class Api::V1::ClaContributionsScoresController < ApplicationController
     contributions_score = ClaContributionsScore.find_or_initialize_by(
       cla_contribution_id: contributions_score_params[:cla_contribution_id],
       cla_user_id: contributions_score_params[:cla_user_id],
-      cla_cohort_id: contributions_score_params[:cla_cohort_id]
+      cla_cohort_id: contributions_score_params[:cla_cohort_id],
+      cla_course_id: contributions_score_params[:cla_course_id]
     )
     
     # Update the score
