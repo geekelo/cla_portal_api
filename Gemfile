@@ -80,3 +80,4 @@ gem 'rack-cors'
 
 gem "letter_opener", "~> 1.10"
 gem 'sendgrid-ruby'
+gem 'mailtrap'
