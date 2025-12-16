@@ -127,6 +127,10 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = true
   
   # Set Mailtrap settings for production (NO inbox_id needed for live sending)
+  config.action_mailer.delivery_method = :mailtrap
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  
   config.after_initialize do
     ActionMailer::Base.mailtrap_settings = {
       api_token: ENV['MAILTRAP_API_TOKEN'],
@@ -137,8 +141,8 @@ Rails.application.configure do
     }
   end
   
-  config.action_mailer.default_url_options = { host: ENV['HOST'] || 'sephcocco.com.ng', protocol: 'https' }
-  config.action_mailer.default_options = { from: ENV.fetch('MAILTRAP_FROM_EMAIL', 'no-reply@sephcocco.com') }
+  config.action_mailer.default_url_options = { host: ENV['HOST'] || 'team@jjrsf.org', protocol: 'https' }
+  config.action_mailer.default_options = { from: ENV.fetch('MAILTRAP_FROM_EMAIL', 'team@jjrs.org') }
 
 
 
