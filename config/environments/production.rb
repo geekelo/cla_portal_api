@@ -141,8 +141,8 @@ Rails.application.configure do
     }
   end
   
-  config.action_mailer.default_url_options = { host: ENV['HOST'] || 'team@jjrsf.org', protocol: 'https' }
-  config.action_mailer.default_options = { from: ENV.fetch('MAILTRAP_FROM_EMAIL', 'team@jjrs.org') }
+  config.action_mailer.default_url_options = { host: ENV['HOST'] || 'jjrsf.org', protocol: 'https' }
+  config.action_mailer.default_options = { from: ENV.fetch('MAILTRAP_FROM_EMAIL', 'team@jjrsf.org') }
 
 
 
