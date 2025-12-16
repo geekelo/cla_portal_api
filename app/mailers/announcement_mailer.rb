@@ -8,7 +8,7 @@ class AnnouncementMailer < ApplicationMailer
       mail(
         to: student.email,
         subject: "New Announcement: #{@announcement.title}",
-        from: 'JJRSF CLA Moodle'
+        from: 'JJRSF CLA Moodle <team@jjrsf.org>'
       )
     end
   end
@@ -20,7 +20,7 @@ class AnnouncementMailer < ApplicationMailer
     mail(
       to: @user.email,
       subject: "Your #{@score_type} has been updated",
-      from: 'JJRSF CLA Moodle'
+      from: 'JJRSF CLA Moodle <team@jjrsf.org>'
     )
   end
 end
